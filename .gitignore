@@ -3,14 +3,14 @@ __pycache__/
 #*.py[cod]
 *$py.class
 
-.ipynb_checkpoints
-*/.ipynb_checkpoints/*
 .*
 !/.gitignore
 
 Log/*
-
-
+.ipynb_checkpoints/
+.ipynb_checkpoints/*
+*/.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
 
 # C extensions
 *.so
