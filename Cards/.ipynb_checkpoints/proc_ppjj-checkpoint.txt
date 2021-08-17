@@ -4,9 +4,9 @@ define j = j b b~
 generate p p > j j
 
 
-output /home/u5/proc_jj
+output /home/u5/proc_ppjj
 
-launch /home/u5/proc_jj
+launch /home/u5/proc_ppjj
 
 
 shower=OFF

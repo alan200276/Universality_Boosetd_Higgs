@@ -24,7 +24,7 @@ do
     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggH.txt > $outpath/proc_ggH_"$i".log 
 
     echo "PP jjjj"
-    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggH.txt > $outpath/proc_ppjjjj_highpt_"$i".log
+    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj.txt > $outpath/proc_ppjj_"$i".log
 
 
    
