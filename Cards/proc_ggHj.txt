@@ -7,7 +7,7 @@ output /home/u5/proc_ggHj
 launch /home/u5/proc_ggHj
 
 shower=OFF
-madspin=ON
+madspin=OFF
 
 set run_card nevents 100000
 set run_card ebeam1 7000.0
@@ -20,5 +20,5 @@ set pt_min_pdg {25:250}
 set pt_max_pdg {25:500}
 
 
-set spinmode none
-decay x0 > b b~
+#set spinmode none
+#decay x0 > b b~
