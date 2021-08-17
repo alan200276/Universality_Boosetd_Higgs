@@ -21,7 +21,7 @@ do
 # PT(H): 250 GeV ~ 500 GeV 
    
     echo "PP H hh"
-    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggH.txt > $outpath/proc_ggH_"$i".log 
+    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggHj.txt > $outpath/proc_ggHj_"$i".log 
 
     echo "PP jjjj"
     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj.txt > $outpath/proc_ppjj_"$i".log
