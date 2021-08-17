@@ -1,4 +1,4 @@
-# Universality_Boosted_Higgs
+# Universality Boosted Higgs
 
 TBA
 
