@@ -1,0 +1,85 @@
+************************************************************
+*                                                          *
+*                     W E L C O M E to                     *
+*              M A D G R A P H 5 _ a M C @ N L O           *
+*                                                          *
+*                                                          *
+*                 *                       *                *
+*                   *        * *        *                  *
+*                     * * * * 5 * * * *                    *
+*                   *        * *        *                  *
+*                 *                       *                *
+*                                                          *
+*         VERSION 2.7.3                 2020-06-21         *
+*                                                          *
+*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
+*                            and                           *
+*            http://amcatnlo.web.cern.ch/amcatnlo/         *
+*                                                          *
+*               Type 'help' for in-line help.              *
+*           Type 'tutorial' to learn how MG5 works         *
+*    Type 'tutorial aMCatNLO' to learn how aMC@NLO works   *
+*    Type 'tutorial MadLoop' to learn how MadLoop works    *
+*                                                          *
+************************************************************
+load MG5 configuration from ../../../../../root/MG5_aMC_v2_7_3/input/mg5_configuration.txt 
+set collier to /root/MG5_aMC_v2_7_3/HEPTools/collier
+set fastjet to /root/FASTJET_3_3_4/bin/fastjet-config
+set lhapdf to /root/LHAPDF_6_3_0/bin/lhapdf-config
+set ninja to /root/MG5_aMC_v2_7_3/HEPTools/lib
+Using default text editor "vi". Set another one in ./input/mg5_configuration.txt
+No valid eps viewer found. Please set in ./input/mg5_configuration.txt
+No valid web browser found. Please set in ./input/mg5_configuration.txt
+import /home/alan/ML_Analysis/Universality_Boosetd_Higgs/Cards/proc_ggH.txt
+The import format was not given, so we guess it as command
+import model HC_NLO_X0_UFO-heft
+[1;60mINFO: Please read carefully the README of the model file for instructions/restrictions of the model. [0m
+INFO: Restrict model HC_NLO_X0_UFO with file ../../../../../root/MG5_aMC_v2_7_3/models/HC_NLO_X0_UFO/restrict_heft.dat . 
+INFO: Run "set stdout_level DEBUG" before import for more information. 
+INFO: Change particles name to pass to MG5 convention 
+Defined multiparticle p = g u c d s u~ c~ d~ s~
+Defined multiparticle j = g u c d s u~ c~ d~ s~
+Defined multiparticle l+ = e+ mu+
+Defined multiparticle l- = e- mu-
+Defined multiparticle vl = ve vm vt
+Defined multiparticle vl~ = ve~ vm~ vt~
+[1;34mPass the definition of 'j' and 'p' to 5 flavour scheme.[0m
+Defined multiparticle all = g gh gh~ d u s c b d~ u~ s~ c~ b~ a ve vm vt e- mu- ve~ vm~ vt~ e+ mu+ t t~ z w+ x0 w- ta- ta+
+generate p p > x0 /t [QCD] @0
+INFO: Generating FKS-subtracted matrix elements for born process: g g > x0 QNP<=1 [ all = QCD ] / t (1 / 1) 
+INFO: Generating virtual matrix elements using MadLoop: 
+INFO: Generating virtual matrix element with MadLoop for process: g g > x0 QNP<=1 [ all = QCD ] / t (1 / 1) 
+INFO: Generated 1 subprocesses with 24 real emission diagrams, 1 born diagrams and 4 virtual diagrams 
+output /home/u5/proc_ggH
+INFO: Writing out the aMC@NLO code, using optimized Loops 
+INFO: initialize a new directory: proc_ggH 
+INFO: remove old information in proc_ggH 
+INFO: Generating real emission matrix-elements... 
+INFO: Generating Helas calls for FKS process: g g > x0 QNP<=1 [ all = QCD ] / t (1 / 1) 
+INFO: Processing color information for process: g g > x0 QNP<=1 [ all = QCD ] / t 
+INFO: ... Done 
+INFO: Writing files in P0_gg_x0_no_t (1 / 1) 
+INFO: Creating files in directory V0_gg_x0_no_t 
+ALOHA: aloha creates VVV1 set of routines with options: L2,P0
+INFO: Computing diagram color coefficients 
+INFO: Drawing loop Feynman diagrams for Process: g g > x0 QNP<=1 [ all = QCD ] / t 
+INFO: Generating born Feynman diagrams for Process: g g > x0 QNP<=1 [ all = QCD ] / t 
+History written to /home/u5/proc_ggH/Cards/proc_card_mg5.dat
+ALOHA: aloha creates VVS10 routines
+ALOHA: aloha creates VVV1 routines
+ALOHA: aloha creates VVVV4 set of routines with options: L2,P0
+ALOHA: aloha creates FFV1 routines
+ALOHA: aloha creates VVVS2 routines
+ALOHA: aloha creates VVVS1 routines
+ALOHA: aloha creates VVS3 routines
+ALOHA: aloha creates VVS2 routines
+ALOHA: aloha creates VVVS1_2 routines
+ALOHA: aloha creates VVS2_10 routines
+ALOHA: aloha creates VVS3_10 routines
+save configuration file to /home/u5/proc_ggH/Cards/amcatnlo_configuration.txt
+INFO: Use Fortran compiler gfortran 
+INFO: Use c++ compiler g++ 
+INFO: Generate jpeg diagrams 
+INFO: Generate web pages 
+INFO: Generating MadAnalysis5 default cards tailored to this process 

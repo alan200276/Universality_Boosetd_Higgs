@@ -1,0 +1,17 @@
+Start Running
+i=1
+2021 Aug 08
+02:52:01 PM
+PP H hh
+stty: 'standard input': Inappropriate ioctl for device
+[1;31mCommand "import /home/alan/ML_Analysis/Universality_Boosetd_Higgs/Cards/proc_ggH.txt" interrupted in sub-command:
+"set run_card nevents 100000" with error:
+InvalidCmd : Possible options for set are ['group_subprocesses', 'ignore_six_quark_processes', 'stdout_level', 'fortran_compiler', 'cpp_compiler', 'loop_optimized_output', 'complex_mass_scheme', 'gauge', 'EWscheme', 'max_npoint_for_channel', 'default_unset_couplings'][0m
+PP jjjj
+stty: 'standard input': Inappropriate ioctl for device
+[1;31mCommand "import /home/alan/ML_Analysis/Universality_Boosetd_Higgs/Cards/proc_ggH.txt" interrupted in sub-command:
+"set run_card nevents 100000" with error:
+InvalidCmd : Possible options for set are ['group_subprocesses', 'ignore_six_quark_processes', 'stdout_level', 'fortran_compiler', 'cpp_compiler', 'loop_optimized_output', 'complex_mass_scheme', 'gauge', 'EWscheme', 'max_npoint_for_channel', 'default_unset_couplings'][0m
+2021 Aug 08
+02:54:07 PM
+gzip: /home/u5/proc_*/Events/run_*/unweighted_events.lhe.gz: No such file or directory
