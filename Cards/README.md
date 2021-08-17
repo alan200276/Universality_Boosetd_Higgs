@@ -4,8 +4,10 @@
 * Signal (gluon gluon production of Higgs bosons in $b\bar{b}b\bar{b}$ final state)  
     * UFO [The Higgs Characterisation model](https://feynrules.irmp.ucl.ac.be/wiki/HiggsCharacterisation)  
     * process:   
-    `import model HC_NLO_X0_UFO-heft`
-    `generate p p > x0 /t [QCD] @0`
+     ```
+    import model HC_NLO_X0_UFO-heft
+    generate p p > x0 /t [QCD] @0
+    ```
     
     * decay in Madspin: 
     ```
