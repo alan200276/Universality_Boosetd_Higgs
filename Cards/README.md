@@ -6,7 +6,7 @@
     * process:   
      ```
     import model HC_NLO_X0_UFO-heft
-    generate p p > x0 /t [QCD] @0
+    generate p p > x0 j /t [QCD]
     ```
     
     * decay in Madspin: 
@@ -31,7 +31,7 @@
     
     * process card:
     ```
-    proc_ggH.txt
+    proc_ggHj.txt
     ```
 
 
