@@ -8,13 +8,7 @@
     import model HC_NLO_X0_UFO-heft
     generate p p > x0 j /t [QCD]
     ```
-    
-    * decay in Madspin: 
-    ```
-    set spinmode none
-    decay x0 > b b~
-    ```
-    
+
     * run_card setting:  
     ```
     set run_card nevents 100000
