@@ -1,0 +1,21 @@
+import model HC_NLO_X0_UFO-heft
+generate p p > x0 j /t[QCD]
+
+
+output /home/u5/proc_ggHj_650_900
+
+launch /home/u5/proc_ggHj_650_900
+
+shower=OFF
+madspin=OFF
+
+set run_card nevents 100000
+set run_card ebeam1 7000.0
+set run_card ebeam2 7000.0
+
+set pdlabel lhapdf
+set lhaid 91500 #PDF4LHC15_nnlo_mc
+
+set pt_min_pdg {25:650}
+set pt_max_pdg {25:900}
+

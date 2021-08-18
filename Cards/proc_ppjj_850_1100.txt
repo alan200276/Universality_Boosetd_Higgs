@@ -1,0 +1,26 @@
+define p = p b b~
+define j = j b b~
+
+generate p p > j j
+
+
+output /home/u5/proc_ppjj_850_1100
+
+launch /home/u5/proc_ppjj_850_1100
+
+
+shower=OFF
+detector=OFF
+analysis=OFF
+
+set run_card nevents 100000
+set run_card ebeam1 7000.0
+set run_card ebeam2 7000.0
+set run_card pdlabel lhapdf 
+set run_card lhaid 260000  #NNPDF30_nlo_as_0118
+
+
+set ptj1min 850
+set ptj1max 1100
+
+
