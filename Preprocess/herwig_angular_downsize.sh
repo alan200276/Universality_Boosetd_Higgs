@@ -1,10 +1,10 @@
 #/bin/bash
 
 PROCESS="Herwig_angular"
-HOMEPATH="/home/alan/ML_Analysis/Universality_DNN_DiHiggs"
-datapath="/home/u5/Universality_DiHiggs/"$PROCESS
-outpath_H="Out/"$PROCESS"_H"
-outpath_QCD="Out/"$PROCESS"_QCD"
+HOMEPATH="/home/alan/ML_Analysis/Universality_Boosetd_Higgs"
+datapath="/home/u5/Universality_Boosetd_Higgs/"$PROCESS
+outpath_H="Log/"$PROCESS"_H"
+outpath_QCD="Log/"$PROCESS"_QCD"
 process="herwig_ang"
 
 date
@@ -15,28 +15,45 @@ echo "Start Running"
 date +"%Y %b %m"
 
 
+# Iterate 10 LHE File for each Pt Slice
 i=1
-while [ $i != 11 ]
-do 
-
-
-#     echo "H $PROCESS"
-#     nohup python3 $HOMEPATH/Preprocess/downsize.py $datapath/ppHhh_"$process"_"$i".root $i "$datapath" > $HOMEPATH/$outpath_H/downsize_ppHhh_"$process"_"$i".log &
+while [ $i != 2 ]
+do
+#========================================================================================
     
-    
-#     echo "QCD $PROCESS"
-#     nohup python3 $HOMEPATH/Preprocess/downsize.py $datapath/ppbbbb_"$process"_"$i".root $i $datapath > $HOMEPATH/$outpath_QCD/downsize_ppbbbb_"$process"_"$i".log &
-    
-    echo "QCD $PROCESS"
-    nohup python3 $HOMEPATH/Preprocess/downsize.py $datapath/ppjjjj_"$process"_"$i".root $i $datapath > $HOMEPATH/$outpath_QCD/downsize_ppjjjj_"$process"_"$i"_high_pt_500.log &
+
+        # Iterate Pt Slices
+        ###################################################################
+        for pt_range in "250_500" "450_700" "650_900" "850_1100" 
+        do
+       
+            echo "pt_range=$pt_range"
+            echo "i =  $i "
+            echo "============================================"
+
+            echo "H $PROCESS"
+            nohup python3 $HOMEPATH/Preprocess/downsize.py $datapath/ggHj_"$process"_"$pt_range"_"$i".root $i "$datapath" > $HOMEPATH/$outpath_H/downsize_ggHj_"$process"_"$pt_range"_"$i".log &
+
+
+            echo "QCD $PROCESS"
+            nohup python3 $HOMEPATH/Preprocess/downsize.py $datapath/ppjj_"$process"_"$pt_range"_"$i".root $i $datapath > $HOMEPATH/$outpath_QCD/downsize_ppjj_"$process"_"$pt_range"_"$i".log &
 
 
 
-    date +"%Y %b %m"
-    date +"%r"
-    i=$(($i+1))
+            date +"%Y %b %m"
+            date +"%r"
+            echo "============================================"
+
+        done  
+        ################################################################### 
+   
+   
+   
+        i=$(($i+1))
 
 done
+#========================================================================================
+
 
 
 
