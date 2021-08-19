@@ -1,0 +1,54 @@
+##################################################
+#Ref: https://pythia.org/latest-manual/Welcome.html
+##################################################
+
+! 1) Settings used in the main program.
+Main:numberOfEvents = 10000
+
+! 2) Settings related to output in init(), next(), amd stat().
+Main:timesAllowErrors = 3 
+Init:showAllSettings = on  
+Next:numberCount = 1000
+Next:numberShowInfo = 1 
+Next:numberShowProcess = 1
+Next:numberShowEvent = 10 
+
+
+! 3) Switch on/off the key event-generation steps.
+PartonShowers:model = 1  #1 : Simple Showers 2 : VINCIA Showers  3 : Dire Showers
+
+PDF:pSet = LHAPDF6:PDF4LHC15_nnlo_mc/0   #PDF4LHC15_nnlo_mc   ! PDF set used in showers and multiparton interactions
+
+Random:setSeed = on
+Random:seed = randomseed
+
+
+! 4) Particle features.
+1:m0 = 0.33                    ! down mass
+2:m0 = 0.33                    ! up mass
+3:m0 = 0.5                    ! strange mass
+4:m0 = 1.5                    ! charm mass
+5:m0 = 4.8                    ! bottom mass
+6:m0 = 173.0                      ! top mass
+11:m0 = 0.000510999                   ! electron mass
+13:m0 = 0.105658                  ! muon mass
+15:m0 = 1.77682                 ! tauon mass
+23:m0 = 91.188                     ! Z mass
+24:m0 = 80.419002                     ! W mass
+25:m0 = 125.0                   ! Higgs mass
+6:mWidth = 1.4915                 ! top width
+23:mWidth = 2.441404                ! Z width
+24:mWidth = 2.0476                ! W width
+25:mWidth = 0.00407              ! Higgs width
+
+
+! 5) Decays.
+25:onMode = off  ! decay mode
+25:onIfMatch = 5 -5  ! decay mode 
+
+
+! 6) Beam-parameter settings.
+Beams:frameType = 4 
+Beams:LHEF = /home/u5/proc_ggHj_250_500/Events/run_01/events.lhe
+
+
