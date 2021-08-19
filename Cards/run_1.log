@@ -1,16 +1,17 @@
 Start Running
 i=1
 2021 Aug 08
-03:11:19 PM
-PP H hh
+02:00:24 PM
+ggH pt 250 GeV ~ 500 GeV
 stty: 'standard input': Inappropriate ioctl for device
-[1;31mCommand "import /home/alan/ML_Analysis/Universality_Boosetd_Higgs/Cards/proc_ggH.txt" interrupted in sub-command:
-"set run_card nevents 100000" with error:
-InvalidCmd : Possible options for set are ['group_subprocesses', 'ignore_six_quark_processes', 'stdout_level', 'fortran_compiler', 'cpp_compiler', 'loop_optimized_output', 'complex_mass_scheme', 'gauge', 'EWscheme', 'max_npoint_for_channel', 'default_unset_couplings'][0m
-PP jjjj
+ggH pt 650 GeV ~ 900 GeV
 stty: 'standard input': Inappropriate ioctl for device
-Unable to download /cvmfs/sft.cern.ch/lcg/external/lhapdfsets/current/NNPDF30_nlo_as_0118.tar.gz
+ggH pt 50 GeV ~ 900 GeV
+stty: 'standard input': Inappropriate ioctl for device
+ggH pt 850 GeV ~ 1100 GeV
+stty: 'standard input': Inappropriate ioctl for device
 2021 Aug 08
-03:14:17 PM
+02:40:02 PM
+gzip: /home/u5/proc_*/Events/run_*/unweighted_events.lhe.gz: No such file or directory
 Finish
-Tue Aug 17 15:14:20 CST 2021
+Thu Aug 19 14:40:04 CST 2021
