@@ -10,8 +10,8 @@ mcdatapath="/home/u5"
 
 echo "Start Running"
 
-i=1
-while [ $i != 2 ]
+i=2
+while [ $i != 11 ]
 do
    echo i=$i
 
@@ -23,8 +23,8 @@ do
     echo "ggH pt 250 GeV ~ 500 GeV"
     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggHj_250_500.txt > $outpath/proc_ggHj_250_500_"$i".log 
 
-#     echo "PP jj pt 250 GeV ~ 500 GeV"
-#     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_250_500.txt > $outpath/proc_ppjj_250_500_"$i".log
+    echo "ppjj pt 250 GeV ~ 500 GeV"
+    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_250_500.txt > $outpath/proc_ppjj_250_500_"$i".log
     
     
 # PT(H): 450 GeV ~ 700 GeV 
@@ -32,8 +32,8 @@ do
     echo "ggH pt 650 GeV ~ 900 GeV"
     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggHj_450_700.txt > $outpath/proc_ggHj_450_700_"$i".log 
 
-#     echo "PP jj pt 450 GeV ~ 700 GeV"
-#     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_450_700.txt > $outpath/proc_ppjj_450_700_"$i".log
+    echo "ppjj pt 450 GeV ~ 700 GeV"
+    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_450_700.txt > $outpath/proc_ppjj_450_700_"$i".log
 
 
 # PT(H): 650 GeV ~ 900 GeV 
@@ -41,8 +41,8 @@ do
     echo "ggH pt 50 GeV ~ 900 GeV"
     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggHj_650_900.txt > $outpath/proc_ggHj_650_900_"$i".log 
 
-#     echo "PP jj pt 650 GeV ~ 900 GeV"
-#     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_650_900.txt > $outpath/proc_ppjj_650_900_"$i".log
+    echo "ppjj pt 650 GeV ~ 900 GeV"
+    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_650_900.txt > $outpath/proc_ppjj_650_900_"$i".log
     
     
     
@@ -51,8 +51,8 @@ do
     echo "ggH pt 850 GeV ~ 1100 GeV"
     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ggHj_850_1100.txt > $outpath/proc_ggHj_850_1100_"$i".log 
 
-#     echo "PP jj"
-#     python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_850_1100.txt > $outpath/proc_ppjj_850_1100_"$i".log
+    echo "ppjj pt 850 GeV ~ 1100 GeV"
+    python /root/MG5_aMC_v2_7_3/bin/mg5_aMC $cardpath/proc_ppjj_850_1100.txt > $outpath/proc_ppjj_850_1100_"$i".log
 
    
    date +"%Y %b %m"
