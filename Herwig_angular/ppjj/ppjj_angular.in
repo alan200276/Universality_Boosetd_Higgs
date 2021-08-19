@@ -16,7 +16,7 @@ library LesHouches.so
 # inserting the lhe file
 cd /Herwig/EventHandlers
 create ThePEG::LesHouchesFileReader myReader
-set myReader:FileName /home/u5/proc_ppjj_850_1100/Events/run_01/unweighted_events.lhe
+set myReader:FileName /home/u5/proc_ppjj_250_500/Events/run_01/unweighted_events.lhe
 create ThePEG::Cuts /Herwig/Cuts/NoCuts 
 set myReader:Cuts /Herwig/Cuts/NoCuts
 #2021/08/11 modified +_highpt_500
@@ -137,7 +137,7 @@ set EventGenerator:MaxErrors 1000
 set /Herwig/Analysis/HepMCFile:PrintEvent 100000
 set /Herwig/Analysis/HepMCFile:Format GenEvent
 set /Herwig/Analysis/HepMCFile:Units GeV_mm
-set /Herwig/Analysis/HepMCFile:Filename /home/u5/Universality_Boosetd_Higgs/Herwig_angular/ppjj_angular_850_1100_1.hepmc
+set /Herwig/Analysis/HepMCFile:Filename /home/u5/Universality_Boosetd_Higgs/Herwig_angular/ppjj_angular_250_500_1.hepmc
 
 saverun ppjj_angular EventGenerator
 #run ppjj_angular EventGenerator
