@@ -35,18 +35,6 @@ do
     sed -i -e "s/randomseed/"$rand"/g" $pythiacmndpath/ppjj.cmnd 
     
     
-#     if [ "$i" == "$i_tmp" ];then
-        
-#         sed -i -e "s/randomseed/"$rand"/g" $pythiacmndpath/ppjj.cmnd 
-    
-#     elif [ "$i" != "$i_tmp" ];then
-
-#         sed -i -e "s/"$rand_tmp"/"$rand"/g" $pythiacmndpath/ppjj.cmnd 
-        
-#     fi
-
-    
-    
     cd $pythiapath
     
         nohup ./main42 $pythiacmndpath/ppjj.cmnd $mcdatapath/Pythia_default/ppjj_pythia_def_"$pt_range"_"$i".hepmc > $outpath/ppjj_"$pt_range"_"$i".log &

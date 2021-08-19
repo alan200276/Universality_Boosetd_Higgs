@@ -33,17 +33,6 @@ do
     
     sed -i -e "s/250_500/"$pt_range"/g" $pythiacmndpath/ggHj.cmnd 
     sed -i -e "s/randomseed/"$rand"/g" $pythiacmndpath/ggHj.cmnd 
-    
-    
-#     if [ "$i" == "$i_tmp" ];then
-        
-#         sed -i -e "s/randomseed/"$rand"/g" $pythiacmndpath/ggHj.cmnd 
-    
-#     elif [ "$i" != "$i_tmp" ];then
-
-#         sed -i -e "s/"$rand_tmp"/"$rand"/g" $pythiacmndpath/ggHj.cmnd 
-        
-#     fi
 
     
     
