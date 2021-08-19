@@ -13,6 +13,8 @@ set run_card nevents 100000
 set run_card ebeam1 7000.0
 set run_card ebeam2 7000.0
 
+set parton_shower PYTHIA8
+
 set pdlabel lhapdf
 set lhaid 91500 #PDF4LHC15_nnlo_mc
 

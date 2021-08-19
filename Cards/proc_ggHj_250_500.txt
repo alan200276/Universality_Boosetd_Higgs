@@ -16,6 +16,8 @@ set run_card ebeam2 7000.0
 set pdlabel lhapdf
 set lhaid 91500 #PDF4LHC15_nnlo_mc
 
+set parton_shower PYTHIA8
+
 set pt_min_pdg {25:250}
 set pt_max_pdg {25:500}
 

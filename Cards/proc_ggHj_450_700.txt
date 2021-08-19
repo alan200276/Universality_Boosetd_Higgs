@@ -6,12 +6,15 @@ output /home/u5/proc_ggHj_450_700
 
 launch /home/u5/proc_ggHj_450_700
 
+
 shower=OFF
 madspin=OFF
 
 set run_card nevents 100000
 set run_card ebeam1 7000.0
 set run_card ebeam2 7000.0
+
+set parton_shower PYTHIA8
 
 set pdlabel lhapdf
 set lhaid 91500 #PDF4LHC15_nnlo_mc
