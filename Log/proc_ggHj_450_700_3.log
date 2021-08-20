@@ -1,0 +1,283 @@
+************************************************************
+*                                                          *
+*                     W E L C O M E to                     *
+*              M A D G R A P H 5 _ a M C @ N L O           *
+*                                                          *
+*                                                          *
+*                 *                       *                *
+*                   *        * *        *                  *
+*                     * * * * 5 * * * *                    *
+*                   *        * *        *                  *
+*                 *                       *                *
+*                                                          *
+*         VERSION 2.7.3                 2020-06-21         *
+*                                                          *
+*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
+*                            and                           *
+*            http://amcatnlo.web.cern.ch/amcatnlo/         *
+*                                                          *
+*               Type 'help' for in-line help.              *
+*           Type 'tutorial' to learn how MG5 works         *
+*    Type 'tutorial aMCatNLO' to learn how aMC@NLO works   *
+*    Type 'tutorial MadLoop' to learn how MadLoop works    *
+*                                                          *
+************************************************************
+load MG5 configuration from ../../../../../root/MG5_aMC_v2_7_3/input/mg5_configuration.txt 
+set collier to /root/MG5_aMC_v2_7_3/HEPTools/collier
+set fastjet to /root/FASTJET_3_3_4/bin/fastjet-config
+set lhapdf to /root/LHAPDF_6_3_0/bin/lhapdf-config
+set ninja to /root/MG5_aMC_v2_7_3/HEPTools/lib
+Using default text editor "vi". Set another one in ./input/mg5_configuration.txt
+No valid eps viewer found. Please set in ./input/mg5_configuration.txt
+No valid web browser found. Please set in ./input/mg5_configuration.txt
+import /home/alan/ML_Analysis/Universality_Boosetd_Higgs/Cards/proc_ggHj_450_700.txt
+The import format was not given, so we guess it as command
+launch /home/u5/proc_ggHj_450_700
+INFO: ************************************************************
+*                                                          *
+*           W E L C O M E  to  M A D G R A P H 5           *
+*                       a M C @ N L O                      *
+*                                                          *
+*                 *                       *                *
+*                   *        * *        *                  *
+*                     * * * * 5 * * * *                    *
+*                   *        * *        *                  *
+*                 *                       *                *
+*                                                          *
+*         VERSION 2.7.3                 2020-06-21         *
+*                                                          *
+*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+*                 http://amcatnlo.cern.ch                  *
+*                                                          *
+*               Type 'help' for in-line help.              *
+*                                                          *
+************************************************************ 
+INFO: load configuration from /home/u5/proc_ggHj_450_700/Cards/amcatnlo_configuration.txt  
+INFO: load configuration from /root/MG5_aMC_v2_7_3/input/mg5_configuration.txt  
+INFO: load configuration from /home/u5/proc_ggHj_450_700/Cards/amcatnlo_configuration.txt  
+Using default text editor "vi". Set another one in ./input/mg5_configuration.txt
+No valid eps viewer found. Please set in ./input/mg5_configuration.txt
+No valid web browser found. Please set in ./input/mg5_configuration.txt
+launch auto 
+The following switches determine which programs are run:
+/=============================================================================\
+1. Type of perturbative computation         [1m      order[0m = [32mNLO[0m         
+2. No MC@[N]LO matching / event generation  [1mfixed_order[0m = [32mOFF[0m         
+3. Shower the generated events              [1m     shower[0m = [32mOFF[0m         
+4. Decay onshell particles                  [1m    madspin[0m = [31mOFF[0m         
+5. Add weights to events for new hypp.      [1m   reweight[0m = [31mOFF[0m         
+6. Run MadAnalysis5 on the events generated [1mmadanalysis[0m = [31mOFF[0m         
+\=============================================================================/
+Either type the switch number (1 to 6) to change its setting,
+Set any switch explicitly (e.g. type 'fixed_order=ON' at the prompt)
+Type 'help' for the list of all valid option
+Type '0', 'auto', 'done' or just press enter when you are done.
+The following switches determine which programs are run:
+/=============================================================================\
+1. Type of perturbative computation         [1m      order[0m = [32mNLO[0m         
+2. No MC@[N]LO matching / event generation  [1mfixed_order[0m = [32mOFF[0m         
+3. Shower the generated events              [1m     shower[0m = [32mOFF[0m         
+4. Decay onshell particles                  [1m    madspin[0m = [31mOFF[0m         
+5. Add weights to events for new hypp.      [1m   reweight[0m = [31mOFF[0m         
+6. Run MadAnalysis5 on the events generated [1mmadanalysis[0m = [31mOFF[0m         
+\=============================================================================/
+Either type the switch number (1 to 6) to change its setting,
+Set any switch explicitly (e.g. type 'fixed_order=ON' at the prompt)
+Type 'help' for the list of all valid option
+Type '0', 'auto', 'done' or just press enter when you are done.
+INFO: will run in mode: noshower 
+[1;34mWARNING: You have chosen not to run a parton shower.
+    NLO events without showering are NOT physical.
+    Please, shower the LesHouches events before using them for physics analyses.
+    You have to choose NOW which parton-shower you WILL use and specify it in the run_card. [0m
+set run_card nevents 100000
+[1mINFO: modify parameter nevents of the run_card.dat to 100000 [0m
+set run_card ebeam1 7000.0
+[1mINFO: modify parameter ebeam1 of the run_card.dat to 7000.0 [0m
+set run_card ebeam2 7000.0
+[1mINFO: modify parameter ebeam2 of the run_card.dat to 7000.0 [0m
+set parton_shower PYTHIA8
+[1mINFO: modify parameter parton_shower of the run_card.dat to PYTHIA8 [0m
+set pdlabel lhapdf
+[1mINFO: modify parameter pdlabel of the run_card.dat to lhapdf [0m
+set lhaid 91500 
+[1mINFO: modify parameter lhaid of the run_card.dat to [91500] [0m
+set pt_min_pdg {25:450}
+[1mINFO: modify parameter pt_min_pdg of the run_card.dat to {'25': 450.0} [0m
+set pt_max_pdg {25:700}
+[1mINFO: modify parameter pt_max_pdg of the run_card.dat to {'25': 700.0} [0m
+Do you want to edit a card (press enter to bypass editing)?
+/------------------------------------------------------------\
+|  [31m1[0m. param : [32mparam_card.dat[0m                                 |
+|  [31m2[0m. run   : [32mrun_card.dat[0m                                   |
+\------------------------------------------------------------/
+ you can also
+   - enter the path to a valid card or banner.
+   - use the 'set' command to modify a parameter directly.
+     The set option works only for param_card and run_card.
+     Type 'help set' for more information on this command.
+   - call an external program (ASperGE/MadWidth/...).
+     Type 'help' for the list of available command
+ [[4m0[0m, done, 1, param, 2, run, enter path]
+[1mThe answer to the previous question is not set in your input file[0m
+[1mUse 0 value[0m
+INFO: Update the dependent parameter of the param_card.dat 
+INFO: Starting run 
+INFO: Compiling the code 
+INFO: Using LHAPDF v6.3.0 interface for PDFs 
+INFO: Compiling source... 
+INFO:           ...done, continuing with P* directories 
+INFO: Compiling directories... 
+INFO: Compiling on 80 cores 
+INFO:  Compiling P0_gg_x0g_no_t... 
+INFO:  Compiling P0_gu_x0u_no_t... 
+INFO:  Compiling P0_gux_x0ux_no_t... 
+INFO:  Compiling P0_ug_x0u_no_t... 
+INFO:  Compiling P0_uux_x0g_no_t... 
+INFO:  Compiling P0_uxg_x0ux_no_t... 
+INFO:  Compiling P0_uxu_x0g_no_t... 
+INFO:     P0_gu_x0u_no_t done. 
+INFO:     P0_uxu_x0g_no_t done. 
+INFO:     P0_ug_x0u_no_t done. 
+INFO:     P0_gg_x0g_no_t done. 
+INFO:     P0_uxg_x0ux_no_t done. 
+INFO:     P0_uux_x0g_no_t done. 
+INFO:     P0_gux_x0ux_no_t done. 
+INFO: Checking test output: 
+INFO: P0_gg_x0g_no_t 
+INFO:  Result for test_ME: 
+INFO:    Passed. 
+INFO:  Result for test_MC: 
+INFO:    Passed. 
+INFO:  Result for check_poles: 
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05) 
+INFO: P0_gu_x0u_no_t 
+INFO:  Result for test_ME: 
+INFO:    Passed. 
+INFO:  Result for test_MC: 
+INFO:    Passed. 
+INFO:  Result for check_poles: 
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05) 
+INFO: P0_gux_x0ux_no_t 
+INFO:  Result for test_ME: 
+INFO:    Passed. 
+INFO:  Result for test_MC: 
+INFO:    Passed. 
+INFO:  Result for check_poles: 
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05) 
+INFO: P0_ug_x0u_no_t 
+INFO:  Result for test_ME: 
+INFO:    Passed. 
+INFO:  Result for test_MC: 
+INFO:    Passed. 
+INFO:  Result for check_poles: 
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05) 
+INFO: P0_uux_x0g_no_t 
+INFO:  Result for test_ME: 
+INFO:    Passed. 
+INFO:  Result for test_MC: 
+INFO:    Passed. 
+INFO:  Result for check_poles: 
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05) 
+INFO: P0_uxg_x0ux_no_t 
+INFO:  Result for test_ME: 
+INFO:    Passed. 
+INFO:  Result for test_MC: 
+INFO:    Passed. 
+INFO:  Result for check_poles: 
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05) 
+INFO: P0_uxu_x0g_no_t 
+INFO:  Result for test_ME: 
+INFO:    Passed. 
+INFO:  Result for test_MC: 
+INFO:    Passed. 
+INFO:  Result for check_poles: 
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05) 
+INFO: Starting run 
+INFO: Using 80 cores 
+INFO: Cleaning previous results 
+INFO: Generating events without running the shower. 
+INFO: Setting up grids 
+INFO:  Idle: 0,  Running: 9,  Completed: 0 [ current time: 21h13 ] 
+INFO:  Idle: 0,  Running: 8,  Completed: 1 [  5.9s  ] 
+INFO:  Idle: 0,  Running: 7,  Completed: 2 [  6s  ] 
+INFO:  Idle: 0,  Running: 6,  Completed: 3 [  6.8s  ] 
+INFO:  Idle: 0,  Running: 5,  Completed: 4 [  8s  ] 
+INFO:  Idle: 0,  Running: 4,  Completed: 5 [  8.3s  ] 
+INFO:  Idle: 0,  Running: 3,  Completed: 6 [  8.8s  ] 
+INFO:  Idle: 0,  Running: 2,  Completed: 7 [  9.2s  ] 
+INFO:  Idle: 0,  Running: 1,  Completed: 8 [  9.3s  ] 
+INFO:  Idle: 0,  Running: 0,  Completed: 9 [  13.5s  ] 
+INFO: Determining the number of unweighted events per channel
+
+      Intermediate results:
+      Random seed: 35
+      Total cross section:      4.126e-02 +- 5.5e-04 pb
+      Total abs(cross section): 7.326e-02 +- 7.0e-04 pb 
+
+ 
+INFO: Computing upper envelope 
+INFO:  Idle: 0,  Running: 9,  Completed: 0 [ current time: 21h13 ] 
+INFO:  Idle: 0,  Running: 8,  Completed: 1 [  5.8s  ] 
+INFO:  Idle: 0,  Running: 7,  Completed: 2 [  6.1s  ] 
+INFO:  Idle: 0,  Running: 6,  Completed: 3 [  7.8s  ] 
+INFO:  Idle: 0,  Running: 5,  Completed: 4 [  8.2s  ] 
+INFO:  Idle: 0,  Running: 4,  Completed: 5 [  8.6s  ] 
+INFO:  Idle: 0,  Running: 3,  Completed: 6 [  29.9s  ] 
+INFO:  Idle: 0,  Running: 2,  Completed: 7 [  36.9s  ] 
+INFO:  Idle: 0,  Running: 1,  Completed: 8 [  1m 10s  ] 
+INFO:  Idle: 0,  Running: 0,  Completed: 9 [  1m 11s  ] 
+INFO: Updating the number of unweighted events per channel
+
+      Intermediate results:
+      Random seed: 35
+      Total cross section:      4.122e-02 +- 1.6e-04 pb
+      Total abs(cross section): 7.350e-02 +- 1.9e-04 pb 
+
+ 
+INFO: Generating events 
+INFO:  Idle: 0,  Running: 9,  Completed: 0 [ current time: 21h15 ] 
+INFO:  Idle: 0,  Running: 8,  Completed: 1 [  1.7s  ] 
+INFO:  Idle: 0,  Running: 7,  Completed: 2 [  1.9s  ] 
+INFO:  Idle: 0,  Running: 6,  Completed: 3 [  8.8s  ] 
+INFO:  Idle: 0,  Running: 5,  Completed: 4 [  12.5s  ] 
+INFO:  Idle: 0,  Running: 4,  Completed: 5 [  12.8s  ] 
+INFO:  Idle: 0,  Running: 3,  Completed: 6 [  1m 32s  ] 
+INFO:  Idle: 0,  Running: 2,  Completed: 7 [  1m 44s  ] 
+INFO:  Idle: 0,  Running: 1,  Completed: 8 [  3m 45s  ] 
+INFO:  Idle: 0,  Running: 0,  Completed: 9 [  3m 57s  ] 
+INFO:    Doing reweight 
+INFO:  Idle: 0,  Running: 7,  Completed: 2 [ current time: 21h19 ] 
+INFO:  Idle: 0,  Running: 6,  Completed: 3 [  0.27s  ] 
+INFO:  Idle: 0,  Running: 5,  Completed: 4 [  0.38s  ] 
+INFO:  Idle: 0,  Running: 4,  Completed: 5 [  0.42s  ] 
+INFO:  Idle: 0,  Running: 3,  Completed: 6 [  5.4s  ] 
+INFO:  Idle: 0,  Running: 2,  Completed: 7 [  5.6s  ] 
+INFO:  Idle: 0,  Running: 1,  Completed: 8 [  9s  ] 
+INFO:  Idle: 0,  Running: 0,  Completed: 9 [  9.4s  ] 
+INFO: Collecting events 
+INFO: 
+   --------------------------------------------------------------
+      Summary:
+      Process p p > x0 j /t[QCD]
+      Run at p-p collider (7000.0 + 7000.0 GeV)
+      Number of events generated: 100000
+      Total cross section: 4.122e-02 +- 1.6e-04 pb
+   --------------------------------------------------------------
+      Scale variation (computed from LHE events):
+          Dynamical_scale_choice -1 (envelope of 9 values): 
+              4.143e-02 pb  +19.8% -18.3%
+   --------------------------------------------------------------
+ 
+INFO: The /home/u5/proc_ggHj_450_700/Events/run_03/events.lhe.gz file has been generated.
+ 
+INFO: Events generated 
+reweight -from_cards
+decay_events -from_cards
+[1;34mWARNING: You have chosen not to run a parton shower. NLO events without showering are NOT physical.
+Please, shower the Les Houches events before using them for physics analyses. [0m
+INFO:  
+quit
+INFO:  
+quit
