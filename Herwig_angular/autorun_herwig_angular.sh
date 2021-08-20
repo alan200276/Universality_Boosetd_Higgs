@@ -14,11 +14,11 @@ date
 
 
 
-nevent=10000
+nevent=100000
 
 # Iterate 10 LHE File for each Pt Slice
-i=1
-while [ $i != 2 ]
+i=2
+while [ $i != 11 ]
 do
 #========================================================================================
     
@@ -84,22 +84,28 @@ do
    
    
    if [ "$i" -lt "10" ];then
-
-       sed -i -e "s/run_0"$(($i-1))"/run_0"$(($i))"/g" ./ppjjjj_angular.in  
-
-       sed -i -e "s/ppjjjj_angular_250_500_"$(($i-1))"/ppjjjj_angular_250_500_"$(($i))"/g" ./ppjjjj_angular.in
+   
+       sed -i -e "s/run_0"$(($i-1))"/run_0"$(($i))"/g" $herwigpath/ggHj/ggHj_angular.in  
+       sed -i -e "s/ggHj_angular_250_500_"$(($i-1))"/ggHj_angular_250_500_"$(($i))"/g" $herwigpath/ggHj/ggHj_angular.in
+       
+ 
+       sed -i -e "s/run_0"$(($i-1))"/run_0"$(($i))"/g" $herwigpath/ppjj/ppjj_angular.in  
+       sed -i -e "s/ppjj_angular_250_500_"$(($i-1))"/ppjj_angular_250_500_"$(($i))"/g" $herwigpath/ppjj/ppjj_angular.in
        
     elif [ "$i" -eq "10" ];then
 
-       sed -i -e "s/run_0"$(($i-1))"/run_"$(($i))"/g" ./ppjjjj_angular.in  
-
-       sed -i -e "s/ppjjjj_angular_250_500_"$(($i-1))"/ppjjjj_angular_250_500_"$(($i))"/g" ./ppjjjj_angular.in
+       sed -i -e "s/run_0"$(($i-1))"/run_"$(($i))"/g" $herwigpath/ggHj/ggHj_angular.in  
+       sed -i -e "s/ggHj_angular_250_500_"$(($i-1))"/ggHj_angular_250_500_"$(($i))"/g" $herwigpath/ggHj/ggHj_angular.in        
+       sed -i -e "s/run_0"$(($i-1))"/run_"$(($i))"/g" $herwigpath/ppjj/ppjj_angular.in  
+       sed -i -e "s/ppjj_angular_250_500_"$(($i-1))"/ppjj_angular_250_500_"$(($i))"/g" $herwigpath/ppjj/ppjj_angular.in   
 
     elif [ "$i" -gt "10" ];then
 
-       sed -i -e "s/run_"$(($i-1))"/run_"$(($i))"/g" ./ppjjjj_angular.in  
-
-       sed -i -e "s/ppjjjj_angular_250_500_"$(($i-1))"/ppjjjj_angular_250_500_"$(($i))"/g" ./ppjjjj_angular.in
+       sed -i -e "s/run_"$(($i-1))"/run_"$(($i))"/g" $herwigpath/ggHj/ggHj_angular.in  
+       sed -i -e "s/ggHj_angular_250_500_"$(($i-1))"/ggHj_angular_250_500_"$(($i))"/g" $herwigpath/ggHj/ggHj_angular.in
+       
+       sed -i -e "s/run_"$(($i-1))"/run_"$(($i))"/g" $herwigpath/ppjj/ppjj_angular.in  
+       sed -i -e "s/ppjj_angular_250_500_"$(($i-1))"/ppjj_angular_250_500_"$(($i))"/g" $herwigpath/ppjj/ppjj_angular.in  
         
     fi
 
@@ -109,27 +115,35 @@ done
 #========================================================================================
 
 
+#========================================================================================
+#Reset to Origin
 
 
 if [ "$i" -lt "10" ];then
 
-    sed -i -e "s/run_0"$(($i))"/run_01/g" ./ppjjjj_angular.in 
+    sed -i -e "s/run_0"$(($i))"/run_01/g" $herwigpath/ggHj/ggHj_angular.in  
+    sed -i -e "s/run_0"$(($i))"/run_01/g" $herwigpath/ppjj/ppjj_angular.in  
     
 elif [ "$i" -eq "10" ];then
 
-    sed -i -e "s/run_"$(($i))"/run_01/g" ./ppjjjj_angular.in
+    sed -i -e "s/run_"$(($i))"/run_01/g" $herwigpath/ggHj/ggHj_angular.in  
+    sed -i -e "s/run_"$(($i))"/run_01/g" $herwigpath/ppjj/ppjj_angular.in  
     
 elif [ "$i" -gt "10" ];then
 
-    sed -i -e "s/run_"$(($i))"/run_01/g" ./ppjjjj_angular.in
+    sed -i -e "s/run_"$(($i))"/run_01/g"  $herwigpath/ggHj/ggHj_angular.in  
+    sed -i -e "s/run_"$(($i))"/run_01/g"  $herwigpath/ppjj/ppjj_angular.in 
     
 fi
 
-cd  $herwigpath/ggHj
-sed -i -e "s/ggHj_angular_250_500_"$(($i))"/ggHj_angular_"$pt_range"_1/g" ./ggHj_angular.in
+#cd  $herwigpath/ggHj
+sed -i -e "s/ggHj_angular_250_500_"$(($i))"/ggHj_angular_"$pt_range"_1/g" $herwigpath/ggHj/ggHj_angular.in
 
-cd  $herwigpath/ppjj
-sed -i -e "s/ppjj_angular_250_500_"$(($i))"/ppjj_angular_"$pt_range"_1/g" ./ppjj_angular.in
+#cd  $herwigpath/ppjj
+sed -i -e "s/ppjj_angular_250_500_"$(($i))"/ppjj_angular_"$pt_range"_1/g" $herwigpath/ppjj/ppjj_angular.in
+
+#========================================================================================
+
 
 
 echo "Finish"
