@@ -1,0 +1,34 @@
+##################################################
+#Ref: https://pythia.org/latest-manual/Welcome.html
+##################################################
+
+
+! 1) Settings used in the main program.
+Main:numberOfEvents = 100000
+
+! 2) Settings related to output in init(), next(), amd stat().
+Main:timesAllowErrors = 3 
+Init:showAllSettings = on  
+Next:numberCount = 1000 
+Next:numberShowInfo = 1 
+Next:numberShowProcess = 1
+Next:numberShowEvent = 10 
+
+
+! 3) Switch on/off the key event-generation steps.
+PartonShowers:model = 3   #1 : Simple Showers 2 : VINCIA Showers  3 : Dire Showers
+
+PDF:pSet = LHAPDF6:NNPDF30_nlo_as_0118/0   #NNPDF30_nlo_as_0118 
+
+Random:setSeed = on
+Random:seed = randomseed
+
+
+! 6) Beam-parameter settings.
+Beams:frameType = 4 
+Beams:LHEF = /home/u5/proc_ppjj_250_500/Events/run_01/unweighted_events.lhe
+
+
+
+
+
