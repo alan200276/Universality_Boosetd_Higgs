@@ -74,6 +74,8 @@ try:
     
     file_number = int(sys.argv[3])
     
+    lhe_process_path = int(sys.argv[4])
+    
     findlast=  []
     for m in re.finditer("/",data_path):
         findlast.append(m.start())
@@ -120,11 +122,12 @@ try:
     logging.info("Showering (SHO) : {}".format(SHO))
     logging.info("Process (PRO) : {}".format(PRO))
     logging.info("Pt Slices (PT_SLICE) : {}".format(PT_SLICE))
+    logging.info("lhe_process_path : {}".format(lhe_process_path))
     
     
 except:
     logging.info("********* Please Check Input Argunment *********")
-    logging.info("********* Usage: python3 preprocess.py <path-of-file>/XXXX.h5 index file_number *********")
+    logging.info("********* Usage: python3 preprocess.py <path-of-file>/XXXX.h5 index file_number lhe_process_path *********")
     sys.exit(1)
 
 
@@ -144,12 +147,39 @@ hf_read = h5py.File(data_path, 'r')
 process_list_clustered = []
 
 double_b_tag, Higgs_candidate = [], []
-raw_weight = []
-
+lhe_weight = []
+weight = []
 
 logging.info(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
+
+logging.info("Get Event Weight For LHE File")
+logging.info("=====START=====")
+t1 = time.time()
 time.sleep(1)
-ticks_1 = time.time()
+
+with open(lhe_process_path, 'r') as f:
+    for i, line in tqdm(enumerate(f)):
+
+        if len(line.split()) != 6:
+                continue
+
+        try:
+            if float(line.split()[0]) == 4 or float(line.split()[0]) == 5:
+                lhe_weight.append(float(line.split()[2])/100000)
+        except:
+            continue
+            
+t2 = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
+
+
+logging.info("Jet Clustering")
+logging.info("=====START=====")
+t1 = time.time()
+time.sleep(1)
+
 
 for i in tqdm(range(len(hf_read["GenParticle"]))):
 
@@ -184,14 +214,20 @@ for i in tqdm(range(len(hf_read["GenParticle"]))):
     if len(Higgs_candidate_tmp) >= 1:
         Higgs_candidate.append(Higgs_candidate_tmp[0])
         double_b_tag.append(1)
+        weight.append(lhe_weight[i])
         
-        for constituent in Higgs_candidate_tmp[0]:
-            raw_weight.append(constituent.weight)
-            break
+#         for constituent in Higgs_candidate_tmp[0]:
+# #             raw_weight.append(constituent.weight)
+#             break
 
     else:
         double_b_tag.append(0)
 
+t2 = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
+        
         
 #     if i == 10:
 #         break
@@ -199,23 +235,22 @@ for i in tqdm(range(len(hf_read["GenParticle"]))):
 logging.info("There are {} events (process_list_clustered).".format(len(process_list_clustered)))
 logging.info("There are {} events (Higgs candidate).".format(len(Higgs_candidate)))
 
-logging.info("\n")
-ticks_2 = time.time()
-totaltime =  ticks_2 - ticks_1
-logging.info("\033[3;33mTime Cost : {:.4f} min\033[0;m".format(totaltime/60.))
-logging.info("\n")
+
+
 
 logging.info(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
-ticks_1 = time.time()
 
-
+logging.info("\n")
+logging.info("For Pandas Data Frame")
+logging.info("=====START=====")
+t1 = time.time()
+time.sleep(1)
     
 ###################################################################################
 """
 Read Data
 """
 ###################################################################################
-
 logging.info("Read Data")
 logging.info("\n")
 
@@ -264,7 +299,7 @@ features = ["GEN","SHO","PRO",
             "t21_0","D21_0","D22_0","C21_0","C22_0",
             "MJ","PTJ","eta","phi",
             "t21","D21","D22","C21","C22",
-            "raw_weight",
+            "weight",
             "eventindex"
            ]
 
@@ -347,7 +382,7 @@ for N in tqdm(range(len(Higgs_candidate))):
     var.append(c21_trimmed)
     var.append(c22_trimmed)
     
-    var.append(raw_weight[N])
+    var.append(weight[N])
         
     var.append(k)
 
@@ -368,336 +403,32 @@ elif index == 1:
     DATA = pd.concat([save_to_csvdata, dataframe], ignore_index=True, axis=0,join='inner')
     DATA.to_csv(path + str(GEN) + "_" + str(SHO) + "_" + str(PRO) + "_" + str(PT_SLICE) + "_" + str(file_number) + ".csv", index = 0)
 
-ticks_2 = time.time()
-totaltime =  ticks_2 - ticks_1
-logging.info("\033[3;33mTime Cost : {:.4f} min\033[0;m".format(totaltime/60.))
+    
+
+t2 = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+logging.info("=====Finish=====")
 logging.info("\n")
+
+
 
 
 
 """
 Leading Jet Images
 """
+
+logging.info("\n")
+logging.info("Leading Jet Images")
+logging.info("=====START=====")
+t1 = time.time()
+time.sleep(1)
+
 make_jet_image(Higgs_candidate,imagespath,GEN,SHO,PRO,PT_SLICE,file_number)
-# ###################################################################################
-# logging.info("Make Leading Jet Images")
-# logging.info("\n")    
-# logging.info(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
-# time.sleep(1)
-# ticks_1 = time.time()
-
-# jetimage_list = []
-
-# for N in tqdm(range(len(process_list_clustered))):
-    
-# #     """
-# #     Trigger
-# #     """
-# #     if ET(process_list_clustered[N][0]) < 420 or process_list_clustered[N][0].mass < 35:
-# #         continue
-        
-#     """
-#     >= 2 jets
-#     """
-#     if len(process_list_clustered[N]) < 2: # at least two jets in this event.
-#         continue
-
-#     jet_1_untrimmed = process_list_clustered[N][0] #leading jet's information
-#     jet_2_untrimmed = process_list_clustered[N][1] #subleading jet's information
-    
-# #     """
-# #     Basic Selection
-# #     """
-
-# #     if (jet_1_untrimmed.pt < 450) or (jet_2_untrimmed.pt < 250) :
-# #         continue
-
-# #     if (abs(jet_1_untrimmed.eta) >= 2) or (jet_1_untrimmed.mass <= 50) :
-# #         continue
-
-# #     if (abs(jet_2_untrimmed.eta) >= 2) or (jet_2_untrimmed.mass <= 50) :
-# #         continue
 
 
-# #     """
-# #     |\Delta\eta| < 1.3
-# #     """        
-# #     if (abs(jet_1_untrimmed.eta - jet_2_untrimmed.eta) > 1.3) :
-# #         continue
-        
-# #     """
-# #     M(jj) > 700 GeV 
-# #     """    
-# #     if MJJ(jet_1_untrimmed,jet_2_untrimmed) < 700:
-# #         continue
-        
-        
-
-# #     jet = process_list_clustered[N][0] #leading jet's information
-#     jet = jet_1_untrimmed
-    
-
-#     width,height = 40,40
-#     image_0 = np.zeros((width,height)) #Charged pt 
-#     image_1 = np.zeros((width,height)) #Neutral pt
-#     image_2 = np.zeros((width,height)) #Charged multiplicity
-#     isReflection = 1
-#     x_hat = np.array([1,0]) 
-#     y_hat = np.array([0,1])
-    
-#     subjets = pyjet.cluster(jet.constituents_array(), R=0.2, p=-1)
-#     subjet_array = subjets.inclusive_jets()
-    
-        
-#     if len(subjet_array) > 1:
-#             #First, let's find the direction of the second-hardest jet relative to the first-hardest jet
-# #             phi_dir = -(dphi(subjet_array[1].phi,subjet_array[0].phi))
-# #             eta_dir = -(subjet_array[1].eta - subjet_array[0].eta)
-#             phi_dir = -(dphi(subjet_array[1].phi,jet.phi))
-#             eta_dir = -(subjet_array[1].eta - jet.eta)
-#             #Norm difference:
-#             norm_dir = np.linalg.norm([phi_dir,eta_dir])
-#             #This is now the y-hat direction. so we can actually find the unit vector:
-#             y_hat = np.divide([phi_dir,eta_dir],np.linalg.norm([phi_dir,eta_dir]))
-#             #and we can find the x_hat direction as well
-#             x_hat = np.array([y_hat[1],-y_hat[0]]) 
-    
-#     if len(subjet_array) > 2:
-# #         phi_dir_3 = -(dphi(subjet_array[2].phi,subjet_array[0].phi))
-# #         eta_dir_3 = -(subjet_array[2].eta - subjet_array[0].eta)
-#         phi_dir_3 = -(dphi(subjet_array[2].phi,jet.phi))
-#         eta_dir_3 = -(subjet_array[2].eta - jet.eta)
-
-#         isReflection = np.cross(np.array([phi_dir,eta_dir,0]),np.array([phi_dir_3,eta_dir_3,0]))[2]
-        
-
-#     R = 1.0
-#     for constituent in jet:
-        
-# #         new_coord = [dphi(constituent.phi,jet.phi),constituent.eta-jet.eta]
-# #         indxs = [math.floor(width*new_coord[0]/(R*1.5))+width//2, math.floor(height*(new_coord[1])/(R*1.5))+height//2]
-
-
-#         if (len(subjet_array) == 1):
-#             #In the case that the reclustering only found one hard jet (that seems kind of bad, but hey)
-#             #no_two = no_two+1
-# #             new_coord = [dphi(constituent.phi,subjet_array[0].phi),constituent.eta-subjet_array[0].eta]
-#             new_coord = [dphi(constituent.phi, jet.phi),constituent.eta-jet.eta]
-#             indxs = [math.floor(width*new_coord[0]/(R*1))+width//2, math.floor(height*(new_coord[1])/(R*1))+height//2]
-            
-#         else:
-#             #Now, we want to express an incoming particle in this new basis:
-# #             part_coord = [dphi(constituent.phi,subjet_array[0].phi),constituent.eta-subjet_array[0].eta]
-#             part_coord = [dphi(constituent.phi,jet.phi),constituent.eta-jet.eta]
-#             new_coord = np.dot(np.array([x_hat,y_hat]),part_coord)
-            
-#             #put third-leading subjet on the right-hand side
-#             if isReflection < 0: 
-#                 new_coord = [-new_coord[0],new_coord[1]]
-#             elif isReflection > 0:
-#                 new_coord = [new_coord[0],new_coord[1]]
-#             #Now, we want to cast these new coordinates into our array
-#             #(row,column)
-# #             indxs = [math.floor(width*new_coord[0]/(R*1.5))+width//2,math.floor(height*(new_coord[1]+norm_dir/1.5)/(R*1.5))+height//2]
-# #             indxs = [math.floor(width*new_coord[0]/(R*1.5))+width//2,math.floor(height*new_coord[1]/(R*1.5))+height//2] #(phi,eta) and the leading subjet at the origin
-# #             indxs = [math.floor(height*new_coord[1]/(R*1.5))+height//2,math.floor(width*new_coord[0]/(R*1.5))+width//2] #(eta,phi) and the leading subjet at the origin
-#             indxs = [math.floor(height*new_coord[1]/(R*1))+height//2,math.floor(width*new_coord[0]/(R*1))+width//2] #(eta,phi) and the leading subjet at the origin
-
-#         if indxs[0] >= width or indxs[1] >= height or indxs[0] <= 0 or indxs[1] <= 0:
-#             continue
-            
-#         phi_index = int(indxs[0]); eta_index = int(indxs[1])
-
-#         #finally, let's fill
-#         if constituent.Charge != 0:
-#             image_0[phi_index,eta_index] = image_0[phi_index,eta_index] + constituent.pt
-#             image_2[phi_index,eta_index] = image_2[phi_index,eta_index] + 1
-
-#         elif constituent.Charge == 0:
-#             image_1[phi_index,eta_index] = image_1[phi_index,eta_index] + constituent.pt
-
-            
-#     image_0 = np.divide(image_0,np.sum(image_0)) #Charged pt 
-#     image_1 = np.divide(image_1,np.sum(image_1)) #Neutral pt 
-#     image_2 = np.divide(image_2,np.sum(image_2)) #Charged multiplicity
-#     jetimage_list.append(np.array([image_0,image_1,image_2]))
-    
-    
-# jetimage_list = np.array(jetimage_list)
-
-
-# logging.info("There are {} jet images.".format(len(jetimage_list)))
-# logging.info("\n")
-# np.savez(imagespath + str(GEN) + "_" + str(SHO) + "_" + str(PRO) +"_"+str(file_number)+"_untrimmed_leading.npz", 
-#            jet_images = jetimage_list)
-
-# ticks_2 = time.time()
-# totaltime =  ticks_2 - ticks_1
-# logging.info("\033[3;33mTime Cost : {:.4f} min\033[0;m".format(totaltime/60.))
-# logging.info("\n")  
-
-
-
-
-"""
-sub-Leading Jet Images
-"""
-
-
-# ###################################################################################
-# logging.info("Make sub-Leading Jet Images")
-# logging.info("\n")    
-# logging.info(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
-# time.sleep(1)
-# ticks_1 = time.time()
-
-# jetimage_list = []
-
-# for N in tqdm(range(len(process_list_clustered))):
-    
-# #     """
-# #     Trigger
-# #     """
-# #     if ET(process_list_clustered[N][0]) < 420 or process_list_clustered[N][0].mass < 35:
-# #         continue
-        
-#     """
-#     >= 2 jets
-#     """
-#     if len(process_list_clustered[N]) < 2: # at least two jets in this event.
-#         continue
-
-#     jet_1_untrimmed = process_list_clustered[N][0] #leading jet's information
-#     jet_2_untrimmed = process_list_clustered[N][1] #subleading jet's information
-    
-# #     """
-# #     Basic Selection
-# #     """
-
-# #     if (jet_1_untrimmed.pt < 450) or (jet_2_untrimmed.pt < 250) :
-# #         continue
-
-# #     if (abs(jet_1_untrimmed.eta) >= 2) or (jet_1_untrimmed.mass <= 50) :
-# #         continue
-
-# #     if (abs(jet_2_untrimmed.eta) >= 2) or (jet_2_untrimmed.mass <= 50) :
-# #         continue
-
-
-# #     """
-# #     |\Delta\eta| < 1.3
-# #     """        
-# #     if (abs(jet_1_untrimmed.eta - jet_2_untrimmed.eta) > 1.3) :
-# #         continue
-        
-# #     """
-# #     M(jj) > 700 GeV 
-# #     """    
-# #     if MJJ(jet_1_untrimmed,jet_2_untrimmed) < 700:
-# #         continue
-        
-        
-
-# #     jet = process_list_clustered[N][0] #leading jet's information
-#     jet = jet_2_untrimmed
-    
-
-#     width,height = 40,40
-#     image_0 = np.zeros((width,height)) #Charged pt 
-#     image_1 = np.zeros((width,height)) #Neutral pt
-#     image_2 = np.zeros((width,height)) #Charged multiplicity
-#     isReflection = 1
-#     x_hat = np.array([1,0]) 
-#     y_hat = np.array([0,1])
-    
-#     subjets = pyjet.cluster(jet.constituents_array(), R=0.2, p=-1)
-#     subjet_array = subjets.inclusive_jets()
-    
-        
-#     if len(subjet_array) > 1:
-#             #First, let's find the direction of the second-hardest jet relative to the first-hardest jet
-# #             phi_dir = -(dphi(subjet_array[1].phi,subjet_array[0].phi))
-# #             eta_dir = -(subjet_array[1].eta - subjet_array[0].eta)
-#             phi_dir = -(dphi(subjet_array[1].phi,jet.phi))
-#             eta_dir = -(subjet_array[1].eta - jet.eta)
-#             #Norm difference:
-#             norm_dir = np.linalg.norm([phi_dir,eta_dir])
-#             #This is now the y-hat direction. so we can actually find the unit vector:
-#             y_hat = np.divide([phi_dir,eta_dir],np.linalg.norm([phi_dir,eta_dir]))
-#             #and we can find the x_hat direction as well
-#             x_hat = np.array([y_hat[1],-y_hat[0]]) 
-    
-#     if len(subjet_array) > 2:
-# #         phi_dir_3 = -(dphi(subjet_array[2].phi,subjet_array[0].phi))
-# #         eta_dir_3 = -(subjet_array[2].eta - subjet_array[0].eta)
-#         phi_dir_3 = -(dphi(subjet_array[2].phi,jet.phi))
-#         eta_dir_3 = -(subjet_array[2].eta - jet.eta)
-
-#         isReflection = np.cross(np.array([phi_dir,eta_dir,0]),np.array([phi_dir_3,eta_dir_3,0]))[2]
-        
-
-#     R = 1.0
-#     for constituent in jet:
-        
-# #         new_coord = [dphi(constituent.phi,jet.phi),constituent.eta-jet.eta]
-# #         indxs = [math.floor(width*new_coord[0]/(R*1.5))+width//2, math.floor(height*(new_coord[1])/(R*1.5))+height//2]
-
-
-#         if (len(subjet_array) == 1):
-#             #In the case that the reclustering only found one hard jet (that seems kind of bad, but hey)
-#             #no_two = no_two+1
-# #             new_coord = [dphi(constituent.phi,subjet_array[0].phi),constituent.eta-subjet_array[0].eta]
-#             new_coord = [dphi(constituent.phi, jet.phi),constituent.eta-jet.eta]
-#             indxs = [math.floor(width*new_coord[0]/(R*1))+width//2, math.floor(height*(new_coord[1])/(R*1))+height//2]
-            
-#         else:
-#             #Now, we want to express an incoming particle in this new basis:
-# #             part_coord = [dphi(constituent.phi,subjet_array[0].phi),constituent.eta-subjet_array[0].eta]
-#             part_coord = [dphi(constituent.phi,jet.phi),constituent.eta-jet.eta]
-#             new_coord = np.dot(np.array([x_hat,y_hat]),part_coord)
-            
-#             #put third-leading subjet on the right-hand side
-#             if isReflection < 0: 
-#                 new_coord = [-new_coord[0],new_coord[1]]
-#             elif isReflection > 0:
-#                 new_coord = [new_coord[0],new_coord[1]]
-#             #Now, we want to cast these new coordinates into our array
-#             #(row,column)
-# #             indxs = [math.floor(width*new_coord[0]/(R*1.5))+width//2,math.floor(height*(new_coord[1]+norm_dir/1.5)/(R*1.5))+height//2]
-# #             indxs = [math.floor(width*new_coord[0]/(R*1.5))+width//2,math.floor(height*new_coord[1]/(R*1.5))+height//2] #(phi,eta) and the leading subjet at the origin
-# #             indxs = [math.floor(height*new_coord[1]/(R*1.5))+height//2,math.floor(width*new_coord[0]/(R*1.5))+width//2] #(eta,phi) and the leading subjet at the origin
-#             indxs = [math.floor(height*new_coord[1]/(R*1))+height//2,math.floor(width*new_coord[0]/(R*1))+width//2] #(eta,phi) and the leading subjet at the origin
-
-#         if indxs[0] >= width or indxs[1] >= height or indxs[0] <= 0 or indxs[1] <= 0:
-#             continue
-            
-#         phi_index = int(indxs[0]); eta_index = int(indxs[1])
-
-#         #finally, let's fill
-#         if constituent.Charge != 0:
-#             image_0[phi_index,eta_index] = image_0[phi_index,eta_index] + constituent.pt
-#             image_2[phi_index,eta_index] = image_2[phi_index,eta_index] + 1
-
-#         elif constituent.Charge == 0:
-#             image_1[phi_index,eta_index] = image_1[phi_index,eta_index] + constituent.pt
-
-            
-#     image_0 = np.divide(image_0,np.sum(image_0)) #Charged pt 
-#     image_1 = np.divide(image_1,np.sum(image_1)) #Neutral pt 
-#     image_2 = np.divide(image_2,np.sum(image_2)) #Charged multiplicity
-#     jetimage_list.append(np.array([image_0,image_1,image_2]))
-    
-    
-# jetimage_list = np.array(jetimage_list)
-
-
-# logging.info("There are {} jet images.".format(len(jetimage_list)))
-# logging.info("\n")
-# np.savez(imagespath + str(GEN) + "_" + str(SHO) + "_" + str(PRO) + "_"+str(file_number)+"_untrimmed_subleading.npz", 
-#            jet_images = jetimage_list)
-
-# ticks_2 = time.time()
-# totaltime =  ticks_2 - ticks_1
-# logging.info("\033[3;33mTime Cost : {:.4f} min\033[0;m".format(totaltime/60.))
-
+t2 = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
 
