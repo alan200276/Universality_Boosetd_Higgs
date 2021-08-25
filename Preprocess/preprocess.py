@@ -154,7 +154,7 @@ logging.info(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
 logging.info("Get Event Weight For LHE File")
 logging.info("=====START=====")
-t1 = time.time()
+t1_time = time.time()
 time.sleep(1)
 
 with open(lhe_process_path, 'r') as f:
@@ -172,15 +172,15 @@ with open(lhe_process_path, 'r') as f:
 logging.info("# of events: {}, Average Weight: {} pb".format(len(lhe_weight),sum(lhe_weight)))
 logging.info("\n")         
 
-t2 = time.time()
-logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+t2_time = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
 logging.info("=====Finish=====")
 logging.info("\n")
 
 
 logging.info("Jet Clustering")
 logging.info("=====START=====")
-t1 = time.time()
+t1_time = time.time()
 time.sleep(1)
 
 
@@ -226,8 +226,8 @@ for i in tqdm(range(len(hf_read["GenParticle"]))):
     else:
         double_b_tag.append(0)
 
-t2 = time.time()
-logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+t2_time = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
 logging.info("=====Finish=====")
 logging.info("\n")
         
@@ -246,7 +246,7 @@ logging.info(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 logging.info("\n")
 logging.info("For Pandas Data Frame")
 logging.info("=====START=====")
-t1 = time.time()
+t1_time = time.time()
 time.sleep(1)
     
 ###################################################################################
@@ -424,14 +424,14 @@ Leading Jet Images
 logging.info("\n")
 logging.info("Leading Jet Images")
 logging.info("=====START=====")
-t1 = time.time()
+t1_time = time.time()
 time.sleep(1)
 
 make_jet_image(Higgs_candidate,imagespath,GEN,SHO,PRO,PT_SLICE,file_number)
 
 
-t2 = time.time()
-logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+t2_time = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
 logging.info("=====Finish=====")
 logging.info("\n")
 
