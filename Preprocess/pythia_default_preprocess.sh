@@ -28,10 +28,10 @@ do
         for pt_range in "250_500" "450_700" "650_900" "850_1100" 
         do
         
-        nohup python3 $HOMEPATH/Preprocess/preprocess.py $datapath/EventList_H_"$process"_"$pt_range"_"$i".h5 0 $i > $HOMEPATH/$outpath_H/preprocess_ggHj_"$process"_"$pt_range"_"$i".log  &
+        nohup python3 $HOMEPATH/Preprocess/preprocess.py $datapath/EventList_H_"$process"_"$pt_range"_"$i".h5 0 $i /home/u5/proc_ggHj_"$pt_range"/Events/run_0"$i"/events.lhe > $HOMEPATH/$outpath_H/preprocess_ggHj_"$process"_"$pt_range"_"$i".log  &
 
 
-        nohup python3 $HOMEPATH/Preprocess/preprocess.py $datapath/EventList_QCD_"$process"_"$pt_range"_"$i".h5 0 $i > $HOMEPATH/$outpath_QCD/preprocess_ppjj_"$process"_"$pt_range"_"$i".log  &
+        nohup python3 $HOMEPATH/Preprocess/preprocess.py $datapath/EventList_QCD_"$process"_"$pt_range"_"$i".h5 0 $i /home/u5/proc_ppjj_"$pt_range"/Events/run_0"$i"/unweighted_events.lhe > $HOMEPATH/$outpath_QCD/preprocess_ppjj_"$process"_"$pt_range"_"$i".log  &
     
 
             date +"%Y %b %m"
