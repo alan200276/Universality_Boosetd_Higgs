@@ -169,6 +169,9 @@ with open(lhe_process_path, 'r') as f:
         except:
             continue
             
+logging.info("# of events: {}, Average Weight: {} pb".format(len(lhe_weight),sum(lhe_weight)))
+logging.info("\n")         
+
 t2 = time.time()
 logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
 logging.info("=====Finish=====")
