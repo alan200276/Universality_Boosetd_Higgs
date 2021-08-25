@@ -145,7 +145,7 @@ def make_jet_image(Higgs_candidate=[],imagespath="path",GEN="GEN",SHO="SHO",PRO=
 
     logging.info("There are {} jet images.".format(len(jetimage_list)))
     logging.info("\n")
-    np.savez(imagespath + str(GEN) + "_" + str(SHO) + "_" + str(PRO) +"_"+str(file_number)+"_untrimmed.npz", 
+    np.savez(imagespath + str(GEN) + "_" + str(SHO) + "_" + str(PRO)+ "_" + str(PT_SLICE) +"_" + str(file_number)+"_untrimmed.npz", 
                jet_images = jetimage_list)
 
     ticks_2 = time.time()
