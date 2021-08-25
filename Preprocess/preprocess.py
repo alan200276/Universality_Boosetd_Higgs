@@ -295,7 +295,7 @@ logging.info("Selection and Trimming")
 logging.info("\n")    
 logging.info(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 time.sleep(1)
-ticks_1 = time.time()
+t1_time = time.time()
     
 features = ["GEN","SHO","PRO",
             "MJ_0","PTJ_0","eta_0","phi_0",
@@ -408,8 +408,8 @@ elif index == 1:
 
     
 
-t2 = time.time()
-logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2-t1)/60.))
+t2_time = time.time()
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
 logging.info("=====Finish=====")
 logging.info("\n")
 
