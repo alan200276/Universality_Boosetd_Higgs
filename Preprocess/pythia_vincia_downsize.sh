@@ -1,11 +1,11 @@
 #/bin/bash
 
-PROCESS="Herwig_angular"
+PROCESS="Pythia_vincia"
 HOMEPATH="/home/alan/ML_Analysis/Universality_Boosetd_Higgs"
 datapath="/home/u5/Universality_Boosetd_Higgs/"$PROCESS
 outpath_H="Log/"$PROCESS"_H"
 outpath_QCD="Log/"$PROCESS"_QCD"
-process="herwig_ang"
+process="pythia_vin"
 
 date
 
