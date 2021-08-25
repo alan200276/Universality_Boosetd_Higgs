@@ -2,11 +2,11 @@
 
 echo "Start Running"
 
-outpath="/home/alan/ML_Analysis/Universality_Boosetd_Higgs/Log/Pythia_default_QCD"
-hepmcpath="/home/u5/Universality_Boosetd_Higgs/Pythia_default"
-savepath="/home/u5/Universality_Boosetd_Higgs/Pythia_default"
-rootfilename="ppjj_pythia_def"
-hepmcfilename="ppjj_pythia_def"
+outpath="/home/alan/ML_Analysis/Universality_Boosetd_Higgs/Log/Pythia_dipole_QCD"
+hepmcpath="/home/u5/Universality_Boosetd_Higgs/Pythia_dipole"
+savepath="/home/u5/Universality_Boosetd_Higgs/Pythia_dipole"
+rootfilename="ppjj_pythia_dip"
+hepmcfilename="ppjj_pythia_dip"
 
 
 
