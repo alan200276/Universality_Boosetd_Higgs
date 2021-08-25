@@ -74,7 +74,7 @@ try:
     
     file_number = int(sys.argv[3])
     
-    lhe_process_path = int(sys.argv[4])
+    lhe_process_path = str(sys.argv[4])
     
     findlast=  []
     for m in re.finditer("/",data_path):
