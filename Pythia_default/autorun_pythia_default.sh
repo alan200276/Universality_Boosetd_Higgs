@@ -13,8 +13,31 @@ echo "============================================"
 date
 
 # Iterate 10 LHE File for each Pt Slice
-i=3
-i_tmp=$i
+i=6
+
+# From Origin to "i"
+
+if [ "$i" -lt "10" ];then
+
+   sed -i -e "s/run_01/run_0"$(($i))"/g" $HOMEPATH/$PROCESS/ggHj.cmnd 
+   sed -i -e "s/run_01/run_0"$(($i))"/g" $HOMEPATH/$PROCESS/ppjj.cmnd 
+#         echo "i<10 $i"
+
+elif [ "$i" -eq "10" ];then
+
+   sed -i -e "s/run_01/run_"$(($i))"/g" $$HOMEPATH/$PROCESS/ggHj.cmnd 
+   sed -i -e "s/run_01/run_"$(($i))"/g" $$HOMEPATH/$PROCESS/ppjj.cmnd 
+#          echo "i==10 $i"
+
+elif [ "$i" -gt "10" ];then
+
+   sed -i -e "s/run_01/run_"$(($i))"/g" $HOMEPATH/$PROCESS/ggHj.cmnd 
+   sed -i -e "s/run_01/run_"$(($i))"/g" $HOMEPATH/$PROCESS/ppjj.cmnd 
+#          echo "i>10 $i"
+
+fi
+
+
 while [ $i != 11 ]
 do
 #========================================================================================
@@ -32,7 +55,7 @@ do
         echo "i= $i"
 
         echo "Random Seed =  $rand "    
-
+        
         sed -i -e "s/250_500/"$pt_range"/g" $HOMEPATH/$PROCESS/ggHj.cmnd 
         sed -i -e "s/randomseed/"$rand"/g"  $HOMEPATH/$PROCESS/ggHj.cmnd 
         

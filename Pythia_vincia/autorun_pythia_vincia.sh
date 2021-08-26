@@ -13,9 +13,32 @@ echo "============================================"
 date
 
 # Iterate 10 LHE File for each Pt Slice
-i=1
-i_tmp=$i
-while [ $i != 2 ]
+i=2
+
+# From Origin to "i"
+
+if [ "$i" -lt "10" ];then
+
+   sed -i -e "s/run_01/run_0"$(($i))"/g" $HOMEPATH/$PROCESS/ggHj.cmnd 
+   sed -i -e "s/run_01/run_0"$(($i))"/g" $HOMEPATH/$PROCESS/ppjj.cmnd 
+#         echo "i<10 $i"
+
+elif [ "$i" -eq "10" ];then
+
+   sed -i -e "s/run_01/run_"$(($i))"/g" $$HOMEPATH/$PROCESS/ggHj.cmnd 
+   sed -i -e "s/run_01/run_"$(($i))"/g" $$HOMEPATH/$PROCESS/ppjj.cmnd 
+#          echo "i==10 $i"
+
+elif [ "$i" -gt "10" ];then
+
+   sed -i -e "s/run_01/run_"$(($i))"/g" $HOMEPATH/$PROCESS/ggHj.cmnd 
+   sed -i -e "s/run_01/run_"$(($i))"/g" $HOMEPATH/$PROCESS/ppjj.cmnd 
+#          echo "i>10 $i"
+
+fi
+
+
+while [ $i != 6 ]
 do
 #========================================================================================
     

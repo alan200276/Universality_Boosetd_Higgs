@@ -13,7 +13,7 @@ hepmcfilename="ppjj_pythia_def"
 
 # Iterate 10 LHE File for each Pt Slice
 i=1
-while [ $i != 2 ]
+while [ $i != 6 ]
 do
 #========================================================================================
     
