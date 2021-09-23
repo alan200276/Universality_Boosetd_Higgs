@@ -12,6 +12,10 @@ Log/*
 */.ipynb_checkpoints/
 */.ipynb_checkpoints/*
 
+*/*/*.h5
+*/*.h5
+*.h5
+
 # C extensions
 *.so
 
