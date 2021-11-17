@@ -58,7 +58,7 @@ try:
     gpus[0],
     [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=10000)])
     logical_gpus = tf.config.experimental.list_logical_devices('GPU')
-    logging.info(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
+    print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
 except RuntimeError as e:
 # Visible devices must be set before GPUs have been initialized
     logging.info(e)
@@ -69,7 +69,7 @@ except RuntimeError as e:
 logging.info("Tensorflow Version is {}".format(tf.__version__))
 logging.info("Keras Version is {}".format(tf.keras.__version__))
 from tensorflow.python.client import device_lib
-logging.info(device_lib.list_local_devices())
+logging.info("{}".format(device_lib.list_local_devices()))
 tf.device('/device:XLA_GPU:0')
 
 
@@ -247,24 +247,24 @@ try:
     data_dict ={
 #             "herwig_ang" : [0,0],
 #             "pythia_def" : [0,0],
-#             "pythia_vin" : [0,0],
-            "pythia_dip" : [0,0],
+            "pythia_vin" : [0,0],
+#             "pythia_dip" : [0,0],
 #             "sherpa_def" : [0,0],
               }  
     
     Norm_dict ={
 #             "herwig_ang" : [0,0],
 #             "pythia_def" : [0,0],
-#             "pythia_vin" : [0,0],
-            "pythia_dip" : [0,0],
+            "pythia_vin" : [0,0],
+#             "pythia_dip" : [0,0],
 #             "sherpa_def" : [0,0],
               }  
     
     data_train = {
 #             "herwig_ang_train" : 0,
 #             "pythia_def_train" : 0,
-#             "pythia_vin_train" : 0,
-            "pythia_dip_train" : 0,
+            "pythia_vin_train" : 0,
+#             "pythia_dip_train" : 0,
 #             "sherpa_def_train" : 0
             }  
     
@@ -338,8 +338,8 @@ logging.info("\n")
 CNN_Model_A1 = {
 #               "herwig_ang" : 0,
 #               "pythia_def" : 0, 
-#               "pythia_vin" : 0, 
-              "pythia_dip" : 0, 
+              "pythia_vin" : 0, 
+#               "pythia_dip" : 0, 
 #               "sherpa_def" : 0,
             }
 
@@ -355,8 +355,8 @@ for i, (model, trainingdata, datadict) in enumerate(zip(CNN_Model_A1, data_train
         training_data = data_train[trainingdata].iloc[train_index]
         validation_data = data_train[trainingdata].iloc[val_index]
         
-#         if model_index == 1:
-#             break
+        if model_index == 3:
+            break
         
        
         try:
@@ -373,7 +373,7 @@ for i, (model, trainingdata, datadict) in enumerate(zip(CNN_Model_A1, data_train
                 os.mkdir("./"+str(model)+"_KFold/CNN_"+str(model)+"_Models_"+str(int(pt_min))+str(int(pt_max)))
                 
                 
-#             x_train_jet, target_train = Loading_Data(training_data, datadict, start=0, stop= len(training_data))
+            x_train_jet, target_train = Loading_Data(training_data, datadict, start=0, stop= len(training_data))
             x_val_jet, target_val = Loading_Data(validation_data, datadict, start=0, stop= len(validation_data))
     
 
@@ -411,28 +411,28 @@ for i, (model, trainingdata, datadict) in enumerate(zip(CNN_Model_A1, data_train
             check_list.append(earlystopping)
             
             
-#             History = model_CNN.fit(
-#                                     np.asarray(x_train_jet), np.asarray(target_train),
-#                                     validation_data = (np.asarray(x_val_jet), np.asarray(target_val)),
-#             #                         validation_split = 0.2,
-#                                     batch_size=512,
-#                                     epochs=200,
-#                                     callbacks=check_list,
-#                                     shuffle=True,
-#                                     verbose=1
-#                                     )
-            batch_size = 512
-            nb_train_samples = len(training_data)
-            nb_val_samples = len(validation_data)
-            
             History = model_CNN.fit(
-                                    generator(training_data, batch_size, datadict),
-                                    epochs= 200,
-                                    steps_per_epoch= nb_train_samples // batch_size,
-                                    validation_data= generator(validation_data, batch_size, datadict),
-                                    validation_steps = nb_val_samples // batch_size,
+                                    np.asarray(x_train_jet), np.asarray(target_train),
+                                    validation_data = (np.asarray(x_val_jet), np.asarray(target_val)),
+            #                         validation_split = 0.2,
+                                    batch_size=512,
+                                    epochs=200,
+                                    callbacks=check_list,
+                                    shuffle=True,
                                     verbose=1
                                     )
+#             batch_size = 512
+#             nb_train_samples = len(training_data)
+#             nb_val_samples = len(validation_data)
+            
+#             History = model_CNN.fit(
+#                                     generator(training_data, batch_size, datadict),
+#                                     epochs= 200,
+#                                     steps_per_epoch= nb_train_samples // batch_size,
+#                                     validation_data= generator(validation_data, batch_size, datadict),
+#                                     validation_steps = nb_val_samples // batch_size,
+#                                     verbose=1
+#                                     )
 
 
             model_CNN.save("./"+str(model)+"_KFold/CNN_"+str(model)+"_Models_"+str(int(pt_min))+str(int(pt_max))+"/" + str(model) + "_CNN_"+str(model_index)+ ".h5")
