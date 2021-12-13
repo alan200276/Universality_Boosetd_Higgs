@@ -75,24 +75,48 @@ tf.device('/device:XLA_GPU:0')
 
 
 
+# def DNN_Model(name):
+    
+#     model_DNN = Sequential(name = "Model_DNN_"+str(name))
+
+
+
+#     model_DNN.add(keras.Input(shape=(len(features),), name = 'input'))
+# #     model_DNN_1.add(Dense(256, activation='relu', name = 'dense_1'))
+#     model_DNN.add(Dense(64, activation='relu', name = 'dense_1'))
+#     model_DNN.add(Dense(32, activation='relu', name = 'dense_2'))
+# #     model_DNN_1.add(Dense(32, activation='relu', name = 'dense_4'))
+#     model_DNN.add(Dense(1, activation='sigmoid', name = 'dense_3'))
+# #     model_DNN_1.add(ActivityRegularization(l2=0.1, name = 'Regularization'))
+#     model_DNN.add(Dropout(0.00001))
+    
+    
+#     # model_opt = keras.optimizers.Adadelta()
+#     model_opt = keras.optimizers.Adam()
+#     model_DNN.compile(loss="binary_crossentropy",#keras.losses.binary_crossentropy
+#                               optimizer=model_opt,
+#                               metrics=['accuracy'])
+
+#     model_DNN.summary()
+
+#     return model_DNN
+
+
 def DNN_Model(name):
     
     model_DNN = Sequential(name = "Model_DNN_"+str(name))
 
-
-
     model_DNN.add(keras.Input(shape=(len(features),), name = 'input'))
-#     model_DNN_1.add(Dense(256, activation='relu', name = 'dense_1'))
-    model_DNN.add(Dense(64, activation='relu', name = 'dense_1'))
-    model_DNN.add(Dense(32, activation='relu', name = 'dense_2'))
-#     model_DNN_1.add(Dense(32, activation='relu', name = 'dense_4'))
-    model_DNN.add(Dense(1, activation='sigmoid', name = 'dense_3'))
-#     model_DNN_1.add(ActivityRegularization(l2=0.1, name = 'Regularization'))
-    model_DNN.add(Dropout(0.00001))
+    model_DNN.add(Dense(224, activation='relu', name = 'dense_1'))
+    model_DNN.add(Dense(928, activation='relu', name = 'dense_2'))
+    model_DNN.add(Dense(288, activation='relu', name = 'dense_3'))
+    model_DNN.add(Dense(1024, activation='relu', name = 'dense_4'))
+    model_DNN.add(keras.layers.Dropout(rate=0.01))
+    model_DNN.add(Dense(1, activation='sigmoid', name = 'dense_output'))
     
     
     # model_opt = keras.optimizers.Adadelta()
-    model_opt = keras.optimizers.Adam()
+    model_opt = keras.optimizers.Adam(learning_rate=6.5428e-05)
     model_DNN.compile(loss="binary_crossentropy",#keras.losses.binary_crossentropy
                               optimizer=model_opt,
                               metrics=['accuracy'])

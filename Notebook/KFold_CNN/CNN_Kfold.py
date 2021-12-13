@@ -16,7 +16,6 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing.image import NumpyArrayIterator
 
 
-
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.utils import shuffle
@@ -28,8 +27,8 @@ from sklearn import metrics
 
 # !pip3 install keras-tuner --upgrade
 # !pip3 install autokeras
-import kerastuner as kt
-import autokeras as ak
+# import kerastuner as kt
+# import autokeras as ak
 
 # Import local libraries
 import numpy as np
@@ -72,8 +71,6 @@ from tensorflow.python.client import device_lib
 logging.info("{}".format(device_lib.list_local_devices()))
 tf.device('/device:XLA_GPU:0')
 
-
-
 try:
     pt_min, pt_max = float(sys.argv[1]), float(sys.argv[2])
     n_splits = int(sys.argv[3])
@@ -86,9 +83,6 @@ except:
     logging.info("********* Usage: python3 CNN_Kfold.py pt_min pt_max n_splits *********")
     sys.exit(1)
     
-
-
-
 
 HOMEPATH = "/dicos_ui_home/alanchung/Universality_Boosetd_Higgs/"
 JetImagePath =  HOMEPATH + "Data_ML/" +"Image_Directory/"
@@ -247,24 +241,24 @@ try:
     data_dict ={
 #             "herwig_ang" : [0,0],
 #             "pythia_def" : [0,0],
-            "pythia_vin" : [0,0],
-#             "pythia_dip" : [0,0],
+#             "pythia_vin" : [0,0],
+            "pythia_dip" : [0,0],
 #             "sherpa_def" : [0,0],
               }  
     
     Norm_dict ={
 #             "herwig_ang" : [0,0],
 #             "pythia_def" : [0,0],
-            "pythia_vin" : [0,0],
-#             "pythia_dip" : [0,0],
+#             "pythia_vin" : [0,0],
+            "pythia_dip" : [0,0],
 #             "sherpa_def" : [0,0],
               }  
     
     data_train = {
 #             "herwig_ang_train" : 0,
 #             "pythia_def_train" : 0,
-            "pythia_vin_train" : 0,
-#             "pythia_dip_train" : 0,
+#             "pythia_vin_train" : 0,
+            "pythia_dip_train" : 0,
 #             "sherpa_def_train" : 0
             }  
     
@@ -338,25 +332,28 @@ logging.info("\n")
 CNN_Model_A1 = {
 #               "herwig_ang" : 0,
 #               "pythia_def" : 0, 
-              "pythia_vin" : 0, 
-#               "pythia_dip" : 0, 
+#               "pythia_vin" : 0, 
+              "pythia_dip" : 0, 
 #               "sherpa_def" : 0,
             }
 
 
 kf = KFold(n_splits = n_splits)
 
-
 for i, (model, trainingdata, datadict) in enumerate(zip(CNN_Model_A1, data_train, data_dict)):
 
-    logging.info("CNN Model: {}  Training Data: {}".format(model, trainingdata))
+    logging.info("CNN Model: {}  Training Data: {} Data Dictionary: {}".format(model, trainingdata, datadict))
     
-    for model_index, (train_index, val_index) in enumerate(kf.split(data_train[trainingdata]["Y"])):
-        training_data = data_train[trainingdata].iloc[train_index]
-        validation_data = data_train[trainingdata].iloc[val_index]
+    x_jet, target = Loading_Data(data_train[trainingdata], datadict, start=0, stop= len(data_train[trainingdata]))
+
+
+    for model_index, (train_index, val_index) in enumerate(kf.split(target)):
+
+        x_train_jet, target_train = x_jet[train_index], target[train_index]
+        x_val_jet, target_val = x_jet[val_index], target[val_index]
         
-        if model_index == 3:
-            break
+        # if model_index == 1:
+        #     break
         
        
         try:
@@ -372,10 +369,6 @@ for i, (model, trainingdata, datadict) in enumerate(zip(CNN_Model_A1, data_train
             if os.path.exists("./"+str(model)+"_KFold/CNN_"+str(model)+"_Models_"+str(int(pt_min))+str(int(pt_max))) == 0:
                 os.mkdir("./"+str(model)+"_KFold/CNN_"+str(model)+"_Models_"+str(int(pt_min))+str(int(pt_max)))
                 
-                
-            x_train_jet, target_train = Loading_Data(training_data, datadict, start=0, stop= len(training_data))
-            x_val_jet, target_val = Loading_Data(validation_data, datadict, start=0, stop= len(validation_data))
-    
 
             ticks_1 = time.time()
 
@@ -445,8 +438,8 @@ for i, (model, trainingdata, datadict) in enumerate(zip(CNN_Model_A1, data_train
             discriminator_test = prediction_test
             discriminator_test = discriminator_test/(max(discriminator_test))
             
-            Performance_Frame["AUC"][0] = metrics.roc_auc_score(validation_data["Y"],discriminator_test)
-            FalsePositiveFull, TruePositiveFull, _ = metrics.roc_curve(validation_data["Y"],discriminator_test)
+            Performance_Frame["AUC"][0] = metrics.roc_auc_score(np.asarray(target_val),discriminator_test)
+            FalsePositiveFull, TruePositiveFull, _ = metrics.roc_curve(np.asarray(target_val),discriminator_test)
             tmp = np.where(FalsePositiveFull != 0)
             Performance_Frame["max_sig"][0] = max(TruePositiveFull[tmp]/np.sqrt(FalsePositiveFull[tmp])) 
             tmp = np.where(TruePositiveFull >= 0.5)
@@ -473,5 +466,5 @@ for i, (model, trainingdata, datadict) in enumerate(zip(CNN_Model_A1, data_train
             logging.info("######################################################################################")
             logging.info("\n")
             
-            
-
+        
+# %%
