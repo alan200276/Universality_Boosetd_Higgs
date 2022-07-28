@@ -107,16 +107,16 @@ def dphi(phi,phi_c):
 # try:
     
 data_npz ={
-            "herwig_ang" : [0,0],
-#             "pythia_def" : [0,0],
+#             "herwig_ang" : [0,0],
+            "pythia_def" : [0,0],
 #             "pythia_vin" : [0,0],
 #             "pythia_dip" : [0,0],
 #             "sherpa_def" : [0,0],
           }  
 
 data_train = {
-            "herwig_ang_train" : 0,
-#             "pythia_def_train" : 0,
+#             "herwig_ang_train" : 0,
+            "pythia_def_train" : 0,
 #             "pythia_vin_train" : 0,
 #             "pythia_dip_train" : 0,
 #             "sherpa_def_train" : 0
@@ -230,8 +230,8 @@ logging.info("\n")
 ############################################################################################################################################################
 
 PFN_Model_A1 = {
-              "herwig_ang" : 0,
-#               "pythia_def" : 0, 
+#               "herwig_ang" : 0,
+              "pythia_def" : 0, 
 #               "pythia_vin" : 0, 
 #               "pythia_dip" : 0, 
             }
@@ -285,8 +285,10 @@ for i, (model, trainingdata) in enumerate(zip(PFN_Model_A1, data_train)):
 
         # build architecture
 #         model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes) #version1
-        model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.01) #version2 #2022/07/19
-        
+#         model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.01) #version2 #2022/07/19
+#         model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.1) #version3 #2022/07/21
+#         model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.1, latent_dropout=0.1) #version4 #2022/07/26
+        model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.15, latent_dropout=0.15) #version4 #2022/07/27
         
         # train model
         History = model_PFN.fit(x_train, target_train,
