@@ -83,6 +83,8 @@ try:
         SHO = str("ang")
     elif "vin" in file_name: 
         SHO = str("vin")
+    elif "lun" in file_name: 
+        SHO = str("lun")
 
     if "ggHj" in file_name:
         PRO = str("H")
