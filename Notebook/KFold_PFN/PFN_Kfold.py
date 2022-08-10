@@ -108,17 +108,17 @@ def dphi(phi,phi_c):
     
 data_npz ={
 #             "herwig_ang" : [0,0],
-            "pythia_def" : [0,0],
+#             "pythia_def" : [0,0],
 #             "pythia_vin" : [0,0],
-#             "pythia_dip" : [0,0],
+            "pythia_dip" : [0,0],
 #             "sherpa_def" : [0,0],
           }  
 
 data_train = {
 #             "herwig_ang_train" : 0,
-            "pythia_def_train" : 0,
+#             "pythia_def_train" : 0,
 #             "pythia_vin_train" : 0,
-#             "pythia_dip_train" : 0,
+            "pythia_dip_train" : 0,
 #             "sherpa_def_train" : 0
         }  
 
@@ -189,8 +189,8 @@ for i,(element, npz_element) in enumerate(zip(data_train, data_npz)):
         for i in range(len(data_train[element][N, :, 1])):
             data_train[element][N, i, 1] = dphi(data_train[element][N, i, 1], data_train[element][N, i, 5])
 
-        # cons.pt/Jet.pt
-        data_train[element][N, :, 2] = data_train[element][N, :, 2]/data_train[element][N, 0, 6]
+        # cons.pt/\SUM(cons.pt)
+        data_train[element][N, :, 2] = data_train[element][N, :, 2]/np.sum(data_train[element][N, :, 2])
 
     #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     ticks_2 = time.time()
@@ -231,9 +231,9 @@ logging.info("\n")
 
 PFN_Model_A1 = {
 #               "herwig_ang" : 0,
-              "pythia_def" : 0, 
+#               "pythia_def" : 0, 
 #               "pythia_vin" : 0, 
-#               "pythia_dip" : 0, 
+              "pythia_dip" : 0, 
             }
 
 
@@ -288,7 +288,9 @@ for i, (model, trainingdata) in enumerate(zip(PFN_Model_A1, data_train)):
 #         model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.01) #version2 #2022/07/19
 #         model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.1) #version3 #2022/07/21
 #         model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.1, latent_dropout=0.1) #version4 #2022/07/26
-        model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], Phi_sizes=Phi_sizes, F_sizes=F_sizes, F_dropouts=0.15, latent_dropout=0.15) #version4 #2022/07/27
+        model_PFN = PFN(input_dim=data_train[element][:,:,:3].shape[-1], 
+                        Phi_sizes=Phi_sizes, F_sizes=F_sizes, 
+                        F_dropouts=0.15, latent_dropout=0.15) #version4 #2022/07/27
         
         # train model
         History = model_PFN.fit(x_train, target_train,
