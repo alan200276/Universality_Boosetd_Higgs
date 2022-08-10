@@ -12,9 +12,9 @@
   NJET:=0; LJET:=2,3; QCUT:=30.;
 
   % me generator settings
-  ME_SIGNAL_GENERATOR Comix Amegic LOOPGEN;
-  EVENT_GENERATION_MODE Weighted;
-  LOOPGEN:=OpenLoops;
+  ME_SIGNAL_GENERATOR Comix Amegic;
+  #EVENT_GENERATION_MODE Weighted;
+  #LOOPGEN:=OpenLoops;
 
   # uncomment to disable hadronization:
   # FRAGMENTATION Off;
