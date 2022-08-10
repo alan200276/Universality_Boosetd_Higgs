@@ -101,6 +101,8 @@ try:
         SHO = str("ang")
     elif "vin" in file_name: 
         SHO = str("vin")
+    elif "lun" in file_name: 
+        SHO = str("lun")
 
     if "H" in file_name:
         PRO = str("H")
@@ -119,17 +121,17 @@ try:
     else:
         PT_SLICE = str("250_550")
 
-    print("File is loaded!")
-    print("Generator (GEN) : {}".format(GEN))
-    print("Showering (SHO) : {}".format(SHO))
-    print("Process (PRO) : {}".format(PRO))
-    print("Pt Slices (PT_SLICE) : {}".format(PT_SLICE))
+    logging.info("File is loaded!")
+    logging.info("Generator (GEN) : {}".format(GEN))
+    logging.info("Showering (SHO) : {}".format(SHO))
+    logging.info("Process (PRO) : {}".format(PRO))
+    logging.info("Pt Slices (PT_SLICE) : {}".format(PT_SLICE))
     # print("lhe_process_path : {}".format(lhe_process_path))
     
     
 except:
-    print("********* Please Check Input Argunment *********")
-    print("********* Usage: python3 preprocess.py <path-of-file>/XXXX.h5 index file_number *********")
+    logging.info("********* Please Check Input Argunment *********")
+    logging.info("********* Usage: python3 preprocess.py <path-of-file>/XXXX.h5 index file_number *********")
     sys.exit(1)
 
 
@@ -140,8 +142,8 @@ Read Data and Jet Clustering
 """
 ###################################################################################
 
-print("Read Data and Jet Clustering ")
-print("\n")
+logging.info("Read Data and Jet Clustering ")
+logging.info("\n")
 
 
 hf_read = h5py.File(data_path, 'r')
@@ -154,8 +156,8 @@ weight = []
 
 print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
-print("Get Event Weight For LHE File")
-print("=====START=====")
+logging.info("Get Event Weight For LHE File")
+logging.info("=====START=====")
 t1_time = time.time()
 time.sleep(1)
 
@@ -172,16 +174,16 @@ time.sleep(1)
 #             continue
             
 # print("# of events: {}, Average Weight: {} pb".format(len(lhe_weight),sum(lhe_weight)))
-print("\n")         
+logging.info("\n")         
 
 t2_time = time.time()
-print("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
-print("=====Finish=====")
-print("\n")
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
 
 
-print("Jet Clustering")
-print("=====START=====")
+logging.info("Jet Clustering")
+logging.info("=====START=====")
 t1_time = time.time()
 time.sleep(1)
 
@@ -229,16 +231,16 @@ for i in tqdm(range(len(hf_read["GenParticle"]))):
         double_b_tag.append(0)
 
 t2_time = time.time()
-print("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
-print("=====Finish=====")
-print("\n")
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
         
         
 #     if i == 10:
 #         break
 
-print("There are {} events (process_list_clustered).".format(len(process_list_clustered)))
-print("There are {} events (Higgs candidate).".format(len(Higgs_candidate)))
+logging.info("There are {} events (process_list_clustered).".format(len(process_list_clustered)))
+logging.info("There are {} events (Higgs candidate).".format(len(Higgs_candidate)))
 
 
 
@@ -247,9 +249,9 @@ print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
 
 
-print("\n")
-print("For Pandas Data Frame")
-print("=====START=====")
+logging.info("\n")
+logging.info("For Pandas Data Frame")
+logging.info("=====START=====")
 t1_time = time.time()
 time.sleep(1)
     
@@ -258,8 +260,8 @@ time.sleep(1)
 Read Data
 """
 ###################################################################################
-print("Read Data")
-print("\n")
+logging.info("Read Data")
+logging.info("\n")
 
 M_J = []
 M_J_trimmed = []
@@ -295,8 +297,8 @@ if index == 1:
 
 ###################################################################################
     
-print("Selection and Trimming")
-print("\n")    
+logging.info("Selection and Trimming")
+logging.info("\n")    
 print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 time.sleep(1)
 t1_time = time.time()
@@ -413,9 +415,9 @@ elif index == 1:
     
 
 t2_time = time.time()
-print("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
-print("=====Finish=====")
-print("\n")
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
 
 
 
@@ -425,9 +427,9 @@ print("\n")
 Leading Jet Images
 """
 
-print("\n")
-print("Leading Jet Images")
-print("=====START=====")
+logging.info("\n")
+logging.info("Leading Jet Images")
+logging.info("=====START=====")
 t1_time = time.time()
 time.sleep(1)
 
@@ -435,17 +437,17 @@ make_jet_image(Higgs_candidate,imagespath,GEN,SHO,PRO,PT_SLICE,file_number)
 
 
 t2_time = time.time()
-print("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
-print("=====Finish=====")
-print("\n")
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
 
 
 
 
 
-print("\n")
-print("For PFN Data Frame")
-print("=====START=====")
+logging.info("\n")
+logging.info("For PFN Data Frame")
+logging.info("=====START=====")
 t1_time = time.time()
 time.sleep(1)
     
@@ -454,8 +456,8 @@ time.sleep(1)
 Read Data
 """
 ###################################################################################
-print("Read Data")
-print("\n")
+logging.info("Read Data")
+logging.info("\n")
 
 pfnpath =  HOMEPATH + "Data_PFN/"
 
@@ -475,6 +477,6 @@ for i, hj in enumerate(Higgs_candidate):
 
 np.savez_compressed(pfnpath + str(GEN) + "_" + str(SHO) + "_" + str(PRO) + "_" + str(PT_SLICE) + "_" + str(file_number), PFN_data_format = PFN_data_format)
 t2_time = time.time()
-print("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
-print("=====Finish=====")
-print("\n")
+logging.info("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
+logging.info("=====Finish=====")
+logging.info("\n")
