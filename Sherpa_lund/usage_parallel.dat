@@ -1,0 +1,1 @@
+nohup parallel -j20 -a parallel_sample_flow.sh > parallel_1.log &
