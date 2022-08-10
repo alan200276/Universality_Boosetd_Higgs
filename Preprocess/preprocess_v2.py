@@ -129,7 +129,7 @@ try:
     
 except:
     print("********* Please Check Input Argunment *********")
-    print("********* Usage: python3 preprocess.py <path-of-file>/XXXX.h5 index file_number lhe_process_path *********")
+    print("********* Usage: python3 preprocess.py <path-of-file>/XXXX.h5 index file_number *********")
     sys.exit(1)
 
 
@@ -439,3 +439,42 @@ print("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-
 print("=====Finish=====")
 print("\n")
 
+
+
+
+
+print("\n")
+print("For PFN Data Frame")
+print("=====START=====")
+t1_time = time.time()
+time.sleep(1)
+    
+###################################################################################
+"""
+Read Data
+"""
+###################################################################################
+print("Read Data")
+print("\n")
+
+pfnpath =  HOMEPATH + "Data_PFN/"
+
+PFN_data_format = np.zeros((len(Higgs_candidate),300,8))
+# (N jets, 300 constituent's space, (cons.eta, cons.phi, cons.pt, cons.e, hj.eta, hj.phi, hj.pt, hj.e))
+
+for i, hj in enumerate(Higgs_candidate):
+    for j, cons in enumerate(hj):
+        PFN_data_format[i,j,0] = cons.eta
+        PFN_data_format[i,j,1] = cons.phi
+        PFN_data_format[i,j,2] = cons.pt
+        PFN_data_format[i,j,3] = cons.e
+        PFN_data_format[i,j,4] = hj.eta
+        PFN_data_format[i,j,5] = hj.phi
+        PFN_data_format[i,j,6] = hj.pt
+        PFN_data_format[i,j,7] = hj.e
+
+np.savez_compressed(pfnpath + str(GEN) + "_" + str(SHO) + "_" + str(PRO) + "_" + str(PT_SLICE) + "_" + str(file_number), PFN_data_format = PFN_data_format)
+t2_time = time.time()
+print("\033[3;33m Time Cost for this Step : {:.4f} min\033[0;m".format((t2_time-t1_time)/60.))
+print("=====Finish=====")
+print("\n")

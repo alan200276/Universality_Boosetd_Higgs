@@ -1,5 +1,6 @@
 #!/bin/python3
 
+#%%
 import uproot
 import pyjet
 import numpy as np
@@ -25,7 +26,7 @@ logging.basicConfig(level = logging.INFO)
 
 
 
-
+#%%
 
 # Returns the difference in phi between phi, and phi_center
 # as a float between (-PI, PI)
@@ -97,6 +98,8 @@ try:
         PT_SLICE = str("650_900")
     elif "850_1100" in file_name:
         PT_SLICE = str("850_1100")
+    else:
+        PT_SLICE = str("250_550")
 
     logging.info("File is loaded!")
     logging.info("Generator (GEN) : {}".format(GEN))
