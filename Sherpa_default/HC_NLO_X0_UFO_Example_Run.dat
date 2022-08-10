@@ -1,0 +1,128 @@
+(run){
+  # general settings
+  EVENTS 100;
+
+  # me generator setup
+  ME_SIGNAL_GENERATOR Comix;
+  SCALES VAR{Abs2(p[0]+p[1])};
+   # LOOPGEN:=OpenLoops;
+
+  EVENT_OUTPUT=HepMC_GenEvent[pphj_sherpa_def_0]
+  EVT_FILE_PATH=/home/u5/Universality_Boosetd_Higgs/Sherpa/
+
+  # uncomment to disable underlying event simulation:
+  # MI_HANDLER None;
+
+  # uncomment to disable hadronization:
+  # FRAGMENTATION Off;
+  # FRAGMENTATION Lund; 
+  # DECAYMODEL Lund; 
+
+  # uncomment to disable shower:
+  # SHOWER_GENERATOR None;
+
+  # model setup
+  MODEL HC_NLO_X0_UFO;
+
+  # set quarks and leptons massless in ME
+  MASSIVE[1]  0;
+  MASSIVE[2]  0;
+  MASSIVE[3]  0;
+  MASSIVE[4]  0;
+  MASSIVE[5]  0;
+  MASSIVE[11] 0;
+  MASSIVE[13] 0;
+  MASSIVE[15] 0;
+
+  # LHC beam setup:
+  BEAM_1 2212; BEAM_ENERGY_1 7000;
+  BEAM_2 2212; BEAM_ENERGY_2 7000;
+
+  # decay setup
+  HARD_DECAYS On;
+  WIDTH[25] 0; 
+  HDH_STATUS[25,5,-5] 2;
+
+
+
+}(run)
+
+(processes){
+  Process 93 93 -> 93 25;
+  Order (*,*,*); 
+  # Syntax: "Order (QCD,QED,QNP);"
+  End process;
+}(processes)
+
+(selector){
+  "PT" 25 250.0,500.0 [PT_UP]
+}(selector)
+
+(ufo){
+block wolfenstein
+	1   0.2253      # lamWS
+	2   0.808       # AWS
+	3   0.132       # rhoWS
+	4   0.341       # etaWS
+
+block yukawa
+	4   1.27        # ymc
+	5   4.2         # ymb
+	6   164.5       # ymt
+	11  0.000511    # yme
+	13  0.10566     # ymmuon
+	15  1.777       # ymtau
+
+block mass
+	4   1.42        # MC
+	6   172.0       # MT
+	5   4.7         # MB
+	23  91.188      # MZ
+	11  0.000511    # Me
+	13  0.10566     # MMUON
+	15  1.777       # MTA
+	25  125.0       # MX0
+
+block sminputs
+	1   132.50698   # aEWM1
+	2   1.16639e-05 # Gf
+	3   0.118       # aS
+
+block frblock
+	1   1000        # Lambda
+	2   1           # cosa
+	3   1           # kSM
+	4   1           # kHtt
+	5   1           # kAtt
+	6   1           # kHbb
+	7   1           # kAbb
+	8   1           # kHll
+	9   1           # kAll
+	10  1           # kHaa
+	11  1           # kAaa
+	12  1           # kHza
+	13  1           # kAza
+	14  1           # kHgg
+	15  1           # kAgg
+	16  0           # kHzz
+	17  0           # kAzz
+	18  0           # kHww
+	19  0           # kAww
+	20  0           # kHda
+	21  0           # kHdz
+	22  0           # kHdwR
+	23  0           # kHdwI
+	100 1           # kHcc
+	101 1           # kAcc
+
+block loop
+	1   91.188      # MU_R
+
+decay 	6   1.50833649  # WT
+decay 	23  2.44140351  # WZ
+decay 	24  2.04759951  # WW
+decay 	15  2.27e-12    # WTau
+decay 	25  0.00407     # WX0
+
+}(ufo)
+
